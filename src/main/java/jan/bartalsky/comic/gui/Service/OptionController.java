@@ -1,4 +1,4 @@
-package jan.bartalsky.comic.Service;
+package jan.bartalsky.comic.gui.Service;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

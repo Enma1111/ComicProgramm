@@ -5,6 +5,6 @@ module jan.bartalsky.comic {
 
     opens jan.bartalsky.comic to javafx.fxml;
     exports jan.bartalsky.comic;
-    exports jan.bartalsky.comic.Service;
-    opens jan.bartalsky.comic.Service to javafx.fxml;
+    exports jan.bartalsky.comic.gui.Service;
+    opens jan.bartalsky.comic.gui.Service to javafx.fxml;
 }
