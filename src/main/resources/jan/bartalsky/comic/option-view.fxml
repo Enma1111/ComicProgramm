@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Service.OptionController">
+   <children>
+      <Label layoutX="38.0" layoutY="20.0" text="Sammlungsverwaltung" />
+      <Label layoutX="35.0" layoutY="57.0" text="Comic" />
+      <Label layoutX="35.0" layoutY="104.0" text="Filme" />
+      <Label layoutX="34.0" layoutY="156.0" text="Bücher" />
+      <Button fx:id="BtnComic" layoutX="134.0" layoutY="53.0" mnemonicParsing="false" onAction="#EnterComicPnl" text="Enter" />
+      <Button fx:id="BtnMovie" layoutX="134.0" layoutY="100.0" mnemonicParsing="false" onAction="#EnterMoviePnl" text="Enter" />
+      <Button fx:id="BtnBook" layoutX="134.0" layoutY="152.0" mnemonicParsing="false" onAction="#EnterBookPnl" text="Enter" />
+      <Separator layoutX="11.0" layoutY="45.0" prefHeight="3.0" prefWidth="182.0" />
+      <Separator layoutX="8.0" layoutY="86.0" prefHeight="3.0" prefWidth="182.0" />
+      <Separator layoutX="10.0" layoutY="138.0" prefHeight="3.0" prefWidth="182.0" />
+   </children>
+</Pane>
