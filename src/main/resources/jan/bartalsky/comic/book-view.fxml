@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Gui.BookController">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="268.0">
+            <children>
+                <Button fx:id="BtnBookSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#SaveBook" text="Speichern" />
+                <Label layoutX="19.0" layoutY="31.0" text="Buch Titel" />
+                <TextField fx:id="TxtComicName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
+                <Separator layoutX="14.0" layoutY="341.0" prefHeight="3.0" prefWidth="218.0" />
+                <Label layoutX="20.0" layoutY="99.0" text="Nummer" />
+                <TextField fx:id="TxtNumber" layoutX="20.0" layoutY="123.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="TxtPlace" layoutX="20.0" layoutY="189.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="TxtPublischer" layoutX="19.0" layoutY="249.0" prefHeight="26.0" prefWidth="218.0" />
+                <Label layoutX="20.0" layoutY="160.0" text="Ort" />
+                <Label layoutX="16.0" layoutY="223.0" text="Verlag" />
+                <Label layoutX="19.0" layoutY="354.0" text="Buch Titel Suche" />
+                <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="385.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="BtnSearch" layoutX="18.0" layoutY="422.0" mnemonicParsing="false" onAction="#BookSearch" text="Suche" />
+                <Separator layoutX="14.0" layoutY="464.0" prefHeight="3.0" prefWidth="218.0" />
+                <Label layoutX="19.0" layoutY="481.0" text="Löschen nach ID" />
+                <CheckBox fx:id="CkBxSureDelete" layoutX="20.0" layoutY="543.0" mnemonicParsing="false" text="Sicher" />
+                <TextField fx:id="TxtDeleteID" layoutX="19.0" layoutY="508.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="BtnDelete" layoutX="16.0" layoutY="574.0" mnemonicParsing="false" onAction="#BookDelete" text="Löschen" />
+            <Button fx:id="BtnBackToOptions" layoutX="50.0" layoutY="617.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
+            <Separator layoutX="17.0" layoutY="607.0" prefHeight="3.0" prefWidth="218.0" />
+            </children></AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <children>
+                <TableView layoutX="9.0" layoutY="14.0" prefHeight="637.0" prefWidth="586.0">
+                    <columns>
+                        <TableColumn fx:id="ColID" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="ColBook" prefWidth="139.20001220703125" text="Buch" />
+                        <TableColumn fx:id="ColNumber" prefWidth="76.00009155273438" text="Nummer" />
+                        <TableColumn fx:id="ColPlace" prefWidth="74.39996337890625" text="Ort" />
+                        <TableColumn fx:id="ColVerlag" prefWidth="92.00006103515625" text="Verlag" />
+                        <TableColumn fx:id="ColDoubleBookIn" prefWidth="117.60009765625" text="Doppbelt In" />
+                    </columns>
+                </TableView>
+            </children></AnchorPane>
+    </items>
+</SplitPane>
