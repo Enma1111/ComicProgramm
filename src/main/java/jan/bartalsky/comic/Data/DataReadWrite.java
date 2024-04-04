@@ -9,43 +9,38 @@ public class DataReadWrite {
 
     XMLParser xmlParser = new XMLParser();
 
-    public void DataRead(String dbName){
-        try {
-            Class.forName("org.hsqldb.jdbc.JDBCDriver");
+    public void DataRead(String tableName){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
 
-            Connection connection = DriverManager.getConnection("jdbc:hsqldb:file:\\Users\\Reha-TN\\Desktop;shutdown=true");
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM" + dbName);
+            String query = "Select * From " + tableName;
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            xmlParser.CreateXml(dbName, resultSet);
+            xmlParser.CreateXml(tableName, resultSet);
 
             resultSet.close();
-            statement.close();
-            connection.close();
+            preparedStatement.close();
 
-        } catch (ClassNotFoundException | SQLException | ParserConfigurationException e) {
+        } catch (SQLException | ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void DataWrite(String dbName, String columnName){
-        try {
-            Class.forName("org.hsqldb.jdbc.JDBCDriver");
+    public void DataWrite(String tableName){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
 
-            Connection connection = DriverManager.getConnection("jdbc:hsqldb:file:\\Users\\Reha-TN\\Desktop;shutdown=true");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM" + dbName);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
 
-            while (resultSet.next()) {
-
-                String data = resultSet.getString(columnName);
-
-            }
+//            while (resultSet.next()) {
+//
+//
+//
+//            }
 
             resultSet.close();
             statement.close();
-            connection.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

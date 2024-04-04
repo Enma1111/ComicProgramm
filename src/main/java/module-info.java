@@ -2,6 +2,7 @@ module jan.bartalsky.comic {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
 
     opens jan.bartalsky.comic to javafx.fxml;
