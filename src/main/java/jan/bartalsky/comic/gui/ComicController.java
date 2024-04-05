@@ -1,5 +1,6 @@
 package jan.bartalsky.comic.Gui;
 
+import jan.bartalsky.comic.Service.FillTableView;
 import jan.bartalsky.comic.Service.NewScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,15 +13,15 @@ public class ComicController {
     @FXML
     private Button BtnDelete;
     @FXML
-    private TableColumn <String, String>  ColNumber;
+    private TableColumn <FillTableView.DataItem, String>  ColNumber;
     @FXML
-    private TableColumn <String, String>  ColDoubleComicIn;
+    private TableColumn <FillTableView.DataItem, String>  ColDoubleComicIn;
     @FXML
     private TextField TxtDeleteID;
     @FXML
-    private TableColumn <String, String>  ColBox;
+    private TableColumn <FillTableView.DataItem, String>  ColBox;
     @FXML
-    private TableColumn <String, String>  ColComic;
+    private TableColumn <FillTableView.DataItem, String>  ColComic;
     @FXML
     private Button BtnComicSave;
     @FXML
@@ -32,9 +33,9 @@ public class ComicController {
     @FXML
     private Button BtnSearch;
     @FXML
-    private TableColumn <String, String>  ColVerlag;
+    private TableColumn <FillTableView.DataItem, String>  ColVerlag;
     @FXML
-    private TableColumn <Integer, Integer> ColID;
+    private TableColumn <FillTableView.DataItem, Integer> ColID;
     @FXML
     private TextField TxtNumber;
     @FXML
@@ -43,8 +44,19 @@ public class ComicController {
     private TextField TxtBox;
     @FXML
     private Button BtnBackToOptions;
+    @FXML
+    private TableView<FillTableView.DataItem> tblComic;
+
+    public void setTblComic(TableView<FillTableView.DataItem> tblComic) {
+        this.tblComic = tblComic;
+    }
+
+    public TableView<FillTableView.DataItem> getTblComic() {
+        return tblComic;
+    }
 
     NewScene newScene = new NewScene();
+
 
     @FXML
     public void SaveComic(ActionEvent actionEvent) {

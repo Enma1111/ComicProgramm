@@ -12,11 +12,12 @@ import java.sql.SQLException;
 
 public class XMLParser {
 
-    public void CreateXml(String name, ResultSet resultSet) throws ParserConfigurationException, SQLException {
+    public Document CreateXml(String name, ResultSet resultSet) throws ParserConfigurationException, SQLException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.newDocument();
 
+//      XML Wurzelelement wird erstellt
         Element rootElement = document.createElement(name);
         document.appendChild(rootElement);
 
@@ -37,5 +38,6 @@ public class XMLParser {
                 rowElement.appendChild(columnElement);
             }
         }
+        return document;
     }
 }
