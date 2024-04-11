@@ -6,13 +6,18 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class XMLParser {
 
-    public Document CreateXml(String name, ResultSet resultSet) throws ParserConfigurationException, SQLException {
+    public Document createXml(String name, ResultSet resultSet) throws ParserConfigurationException, SQLException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.newDocument();
@@ -24,19 +29,41 @@ public class XMLParser {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();
 
-        while(resultSet.next()){
+        while (resultSet.next()) {
 
             Element rowElement = document.createElement("row");
+
+//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//            Transformer transformer = transformerFactory.newTransformer();
+//            DOMSource source = new DOMSource(document);
+//            StreamResult result = new StreamResult(System.out); // Output to console, change if you want to save to a file
+//            transformer.transform(source, result);
 
 
             for (int i = 1; i <= columnCount; i++) {
                 String columnName = metaData.getColumnName(i);
                 String columnValue = resultSet.getString(i);
-
                 Element columnElement = document.createElement(columnName);
-                columnElement.appendChild(document.createTextNode(columnValue));
-                rowElement.appendChild(columnElement);
+
+                if (columnValue != null) {
+                    Element id = document.createElement(metaData.getColumnName(i));
+                    id.appendChild(document.createTextNode(resultSet.getString(i)));
+                    rowElement.appendChild(id);
+                    columnElement.appendChild(document.createTextNode(columnValue));
+
+                } else {
+                    columnElement.appendChild(document.createTextNode(""));
+                }
+                rootElement.appendChild(rowElement);
             }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult("output.xml"); // Output to console, change if you want to save to a file
+            transformer.transform(source, result);
+
+
         }
         return document;
     }

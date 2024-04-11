@@ -4,6 +4,7 @@ module jan.bartalsky.comic {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires java.desktop;
+    requires org.slf4j;
 
 
     opens jan.bartalsky.comic to javafx.fxml;

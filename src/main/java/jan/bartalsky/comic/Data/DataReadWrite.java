@@ -4,27 +4,30 @@ import jan.bartalsky.comic.Service.XMLParser;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.sql.*;
 
 public class DataReadWrite {
 
-    XMLParser xmlParser = new XMLParser();
+    private final XMLParser xmlParser;
+
+    public DataReadWrite(XMLParser xmlParser) {
+        this.xmlParser = xmlParser;
+    }
 
     public Document DataRead(String tableName){
-        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
+        String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+        String query = "SELECT * FROM " + tableName;
 
-            String query = "Select * From " + tableName;
+        try(Connection connection = DriverManager.getConnection(url)) {
+
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            Document document = xmlParser.CreateXml(tableName, resultSet);
+            return xmlParser.createXml(tableName, resultSet);
 
-            resultSet.close();
-            preparedStatement.close();
 
-            return document;
-
-        } catch (SQLException | ParserConfigurationException e) {
+        } catch (SQLException | ParserConfigurationException | TransformerException e) {
             throw new RuntimeException(e);
         }
 

@@ -1,5 +1,6 @@
 package jan.bartalsky.comic.Data;
 
+import jan.bartalsky.comic.Service.DataExporter;
 import jan.bartalsky.comic.Service.FillTableView;
 
 import org.w3c.dom.Document;
@@ -16,10 +17,24 @@ public class DataXmlExtract {
         NodeList rowList = document.getDocumentElement().getElementsByTagName("row");
 
         for (int i = 0; i < rowList.getLength(); i++) {
-            Element element = (Element) rowList.item(i);
-                String value = element.getTextContent();
-                dataItems.add(new FillTableView.DataItem(value));
-            }
-        return dataItems;
+            Element row = (Element) rowList.item(i);
+
+            String id = getTextContentFromElement(row, "ID");
+            String comicName = getTextContentFromElement(row, "Comic");
+            String number = getTextContentFromElement(row, "Nummer");
+            String packaging = getTextContentFromElement(row, "Verpackung");
+            String box = getTextContentFromElement(row, "Kiste");
+            String doubleComicIn = getTextContentFromElement(row, "Doppelt");
+            String publisher = getTextContentFromElement(row, "Verlag");
+
+            FillTableView.DataItem dataItem = new FillTableView.DataItem(id, comicName, number, packaging, box, doubleComicIn, publisher);
+            dataItems.add(dataItem);
         }
+        return dataItems;
+    }
+
+    private String getTextContentFromElement(Element parentElement, String tagName) {
+        Element element = (Element) parentElement.getElementsByTagName(tagName).item(0);
+        return element != null ? element.getTextContent() : "";
+    }
 }

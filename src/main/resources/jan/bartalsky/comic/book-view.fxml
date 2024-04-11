@@ -10,9 +10,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Gui.BookController">
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Gui.BookController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="268.0">
+        <AnchorPane>
             <children>
                 <Button fx:id="BtnBookSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#SaveBook" text="Speichern" />
                 <Label layoutX="19.0" layoutY="31.0" text="Buch Titel" />
@@ -35,9 +35,9 @@
             <Button fx:id="BtnBackToOptions" layoutX="50.0" layoutY="617.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
             <Separator layoutX="17.0" layoutY="607.0" prefHeight="3.0" prefWidth="218.0" />
             </children></AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <AnchorPane prefHeight="708.0">
             <children>
-                <TableView layoutX="9.0" layoutY="14.0" prefHeight="637.0" prefWidth="586.0">
+                <TableView fx:id="tblBook" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
                     <columns>
                         <TableColumn fx:id="ColID" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="ColBook" prefWidth="139.20001220703125" text="Buch" />
