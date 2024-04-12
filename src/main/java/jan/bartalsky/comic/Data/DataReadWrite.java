@@ -33,12 +33,14 @@ public class DataReadWrite {
 
     }
 
-    public void DataWrite(String tableName){
+    public void DataWrite(String tableName, String column2, String column3, String column4, String column5, String column6, String column7){
+        String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+        String query = "INSERT INTO " + tableName + " (" + + "\nVALUES";
+
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
-
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 //            while (resultSet.next()) {
 //
 //

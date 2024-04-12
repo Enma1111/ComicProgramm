@@ -19,25 +19,88 @@ public class FillTableView {
         private final String number;
         private final String packaging;
         private final String box;
-        private final String doubleComicIn;
+        private final String doubleItem;
         private final String publisher;
         private final String movieName;
+        private final String mainActor;
         private final String distributer;
         private final String format;
         private final String bookName;
 
-        public DataItem(String id, String comicName, String number, String packaging, String box, String doubleComicIn, String publisher, String movieName, String distributer, String format, String bookName) {
+        public DataItem(String id, String comicName, String number, String packaging, String box, String doubleItem, String publisher, String movieName, String mainActor, String distributer, String format, String bookName) {
             this.id = id;
             this.comicName = comicName;
             this.number = number;
             this.packaging = packaging;
             this.box = box;
-            this.doubleComicIn = doubleComicIn;
+            this.doubleItem = doubleItem;
             this.publisher = publisher;
             this.movieName = movieName;
+            this.mainActor = mainActor;
             this.distributer = distributer;
             this.format = format;
             this.bookName = bookName;
+
+        }
+
+        public static DataItem createComicDataItem(String id, String comicName, String number, String packaging, String box, String doubleItem, String publisher) {
+            return new DataItem(id, comicName, number, packaging, box, doubleItem, publisher,"","","","","");
+        }
+
+        public static DataItem createMovieDataItem(String id, String movieName, String mainActor, String box, String distributer, String format, String doubleItem) {
+            return new DataItem(id,"","","", box, doubleItem, "",movieName, mainActor,  distributer, format,"");
+        }
+
+        public static DataItem createBookDataItem(String id, String bookName, String box, String publisher ){
+            return new DataItem(id, "", "","", box,"", publisher,"","", "", "",bookName);
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getComicName() {
+            return comicName;
+        }
+
+        public String getPackaging() {
+            return packaging;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public String getBox() {
+            return box;
+        }
+
+        public String getMovieName() {
+            return movieName;
+        }
+
+        public String getMainActor() {
+            return mainActor;
+        }
+
+        public String getDistributer() {
+            return distributer;
+        }
+
+        public String getFormat() {
+            return format;
+        }
+
+        public String getBookName() {
+            return bookName;
+        }
+
+        public String getDoubleComicIn() {
+            return doubleItem;
+        }
+
+        public String getPublisher() {
+            return publisher;
         }
     }
 
