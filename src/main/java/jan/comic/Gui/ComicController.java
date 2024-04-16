@@ -1,11 +1,8 @@
-package jan.bartalsky.comic.Gui;
+package jan.comic.Gui;
 
-import jan.bartalsky.comic.Data.DataReadWrite;
-import jan.bartalsky.comic.Data.DataXmlExtract;
-import jan.bartalsky.comic.Service.FillTableView;
-import jan.bartalsky.comic.Service.NewScene;
-import jan.bartalsky.comic.Service.XMLParser;
-import javafx.application.Platform;
+import jan.comic.Data.DataReadWrite;
+import jan.comic.Data.DataXmlExtract;
+import jan.comic.Service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -54,39 +51,43 @@ public class ComicController {
     private TableView<FillTableView.DataItem> tblComic;
     @FXML
     private TableColumn <FillTableView.DataItem, String> ColPackaging;
+    @FXML
+    private TextField TxtPackaging;
 
     public void setTblComic(TableView<FillTableView.DataItem> tblComic) {
         this.tblComic = tblComic;
     }
 
+    String table = "Comic_Table";
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser();
     DataReadWrite dataReadWrite = new DataReadWrite(xmlParser);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
+    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
+    TableIInitiator tableIInitiator = new TableIInitiator(dataReadWrite, dataXmlExtract);
 
     @FXML
     public void initialize(){
-        Document document = dataReadWrite.DataRead("Comic_Table");
-
-        if (document != null) {
-            List<FillTableView.DataItem> dataItems = dataXmlExtract.extractData(document);
-
-            if (!dataItems.isEmpty()) {
-                FillTableView fillTableView = new FillTableView(tblComic);
-                fillTableView.fillTableView(dataItems);
-
-
-            } else {
-                System.err.println("DataItems list is empty!");
-            }
-        } else {
-            System.err.println("Document is null!");
-        }
+        tableIInitiator.initialize(tblComic, table);
     }
 
     @FXML
     public void SaveComic(ActionEvent actionEvent) {
+        String[] val = new String[5];
+        val[0] = TxtComicName.getCharacters().toString();
+        val[1] = TxtNumber.getCharacters().toString();
+        val[2] =TxtPackaging.getCharacters().toString();
+        val[3] = TxtBox.getCharacters().toString();
+        val[4] = TxtPublischer.getCharacters().toString();
 
+        for (int i = 0; i < val.length; i++) {
+            if (val[i].isEmpty()) {
+                val[i] = "";
+            }
+        }
+
+        dataReadWrite.DataWrite(val, sqlWriteQuery.saveQuery(val));
+        tableIInitiator.initialize(tblComic, table);
     }
 
     @FXML
@@ -101,7 +102,7 @@ public class ComicController {
     public void BackToOptions(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnBackToOptions.getScene().getWindow();
         try {
-            newScene.newScene("option-view.fxml", stage, 320, 240);
+            newScene.newScene("option-view.fxml", stage, 200, 200,"Optionen");
         } catch (IOException e) {
             throw new IOException(e);
         }

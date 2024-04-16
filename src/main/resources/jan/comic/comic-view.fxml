@@ -12,30 +12,32 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.24594363791631085" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Gui.ComicController">
+<SplitPane dividerPositions="0.24594363791631085" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.ComicController">
   <items>
     <AnchorPane>
          <children>
-            <Button fx:id="BtnComicSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#SaveComic" text="Speichern" />
+            <Button fx:id="BtnComicSave" layoutX="14.0" layoutY="341.0" mnemonicParsing="false" onAction="#SaveComic" text="Speichern" />
             <Label layoutX="19.0" layoutY="31.0" text="Comic Titel" />
             <TextField fx:id="TxtComicName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="210.0" />
-            <Separator layoutX="14.0" layoutY="341.0" prefHeight="3.0" prefWidth="218.0" />
-            <Label layoutX="20.0" layoutY="99.0" text="Nummer" />
-            <TextField fx:id="TxtNumber" layoutX="20.0" layoutY="123.0" prefHeight="26.0" prefWidth="210.0" />
-            <TextField fx:id="TxtBox" layoutX="20.0" layoutY="189.0" prefHeight="26.0" prefWidth="210.0" />
-            <TextField fx:id="TxtPublischer" layoutX="19.0" layoutY="249.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="20.0" layoutY="160.0" text="Kiste" />
-            <Label layoutX="16.0" layoutY="223.0" text="Verlag" />
-            <Label layoutX="19.0" layoutY="354.0" text="Comic Titel Suche" />
-            <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="385.0" prefHeight="26.0" prefWidth="210.0" />
-            <Button fx:id="BtnSearch" layoutX="18.0" layoutY="422.0" mnemonicParsing="false" onAction="#ComicSearch" text="Suche" />
-            <Separator layoutX="14.0" layoutY="464.0" prefHeight="3.0" prefWidth="218.0" />
-            <Label layoutX="19.0" layoutY="481.0" text="Löschen nach ID" />
-            <CheckBox fx:id="CkBxSureDelete" layoutX="20.0" layoutY="543.0" mnemonicParsing="false" text="Sicher" />
-            <TextField fx:id="TxtDeleteID" layoutX="19.0" layoutY="508.0" prefHeight="26.0" prefWidth="210.0" />
-            <Button fx:id="BtnDelete" layoutX="16.0" layoutY="574.0" mnemonicParsing="false" onAction="#ComicDelete" text="Löschen" />
-            <Separator layoutX="13.0" layoutY="623.0" prefHeight="3.0" prefWidth="218.0" />
-            <Button fx:id="BtnBackToOptions" layoutX="62.0" layoutY="646.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
+            <Separator layoutX="12.0" layoutY="379.0" prefHeight="3.0" prefWidth="218.0" />
+            <Label layoutX="20.0" layoutY="93.0" text="Nummer" />
+            <TextField fx:id="TxtNumber" layoutX="16.0" layoutY="119.0" prefHeight="26.0" prefWidth="210.0" />
+            <TextField fx:id="TxtBox" layoutX="16.0" layoutY="240.0" prefHeight="26.0" prefWidth="210.0" />
+            <TextField fx:id="TxtPublischer" layoutX="16.0" layoutY="304.0" prefHeight="26.0" prefWidth="210.0" />
+            <Label layoutX="19.0" layoutY="214.0" text="Kiste" />
+            <Label layoutX="15.0" layoutY="274.0" text="Verlag" />
+            <Label layoutX="15.0" layoutY="396.0" text="Comic Titel Suche" />
+            <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="425.0" prefHeight="26.0" prefWidth="210.0" />
+            <Button fx:id="BtnSearch" layoutX="20.0" layoutY="469.0" mnemonicParsing="false" onAction="#ComicSearch" text="Suche" />
+            <Separator layoutX="12.0" layoutY="502.0" prefHeight="3.0" prefWidth="218.0" />
+            <Label layoutX="18.0" layoutY="512.0" text="Löschen nach ID" />
+            <CheckBox fx:id="CkBxSureDelete" layoutX="16.0" layoutY="576.0" mnemonicParsing="false" text="Sicher" />
+            <TextField fx:id="TxtDeleteID" layoutX="16.0" layoutY="542.0" prefHeight="26.0" prefWidth="210.0" />
+            <Button fx:id="BtnDelete" layoutX="14.0" layoutY="603.0" mnemonicParsing="false" onAction="#ComicDelete" text="Löschen" />
+            <Separator layoutX="14.0" layoutY="641.0" prefHeight="3.0" prefWidth="218.0" />
+            <Button fx:id="BtnBackToOptions" layoutX="62.0" layoutY="661.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
+            <Label layoutX="16.0" layoutY="152.0" text="Verpackung" />
+            <TextField fx:id="TxtPackaging" layoutX="16.0" layoutY="177.0" prefHeight="26.0" prefWidth="210.0" />
          </children>
          <padding>
             <Insets right="10.0" />

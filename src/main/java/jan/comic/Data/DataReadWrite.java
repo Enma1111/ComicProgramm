@@ -1,6 +1,6 @@
-package jan.bartalsky.comic.Data;
+package jan.comic.Data;
 
-import jan.bartalsky.comic.Service.XMLParser;
+import jan.comic.Service.XMLParser;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,29 +26,22 @@ public class DataReadWrite {
 
             return xmlParser.createXml(tableName, resultSet);
 
-
         } catch (SQLException | ParserConfigurationException | TransformerException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public void DataWrite(String tableName, String column2, String column3, String column4, String column5, String column6, String column7){
-        String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-        String query = "INSERT INTO " + tableName + " (" + + "\nVALUES";
+    public void DataWrite(String[] val, String query) {
 
-        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
-
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
+            System.out.println(query);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//
-//
-//
-//            }
 
-            resultSet.close();
-            statement.close();
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new row has been inserted.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

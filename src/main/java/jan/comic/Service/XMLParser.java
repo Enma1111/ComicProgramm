@@ -1,4 +1,4 @@
-package jan.bartalsky.comic.Service;
+package jan.comic.Service;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

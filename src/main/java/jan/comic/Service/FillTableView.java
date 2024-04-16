@@ -1,8 +1,11 @@
-package jan.bartalsky.comic.Service;
+package jan.comic.Service;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class FillTableView {
@@ -43,15 +46,18 @@ public class FillTableView {
 
         }
 
-        public static DataItem createComicDataItem(String id, String comicName, String number, String packaging, String box, String doubleItem, String publisher) {
+        @Contract(value = "_, _, _, _, _, _, _ -> new", pure = true)
+        public static @NotNull DataItem createComicDataItem(String id, String comicName, String number, String packaging, String box, String doubleItem, String publisher) {
             return new DataItem(id, comicName, number, packaging, box, doubleItem, publisher,"","","","","");
         }
 
-        public static DataItem createMovieDataItem(String id, String movieName, String mainActor, String box, String distributer, String format, String doubleItem) {
+        @Contract(value = "_, _, _, _, _, _, _ -> new", pure = true)
+        public static @NotNull DataItem createMovieDataItem(String id, String movieName, String mainActor, String box, String distributer, String format, String doubleItem) {
             return new DataItem(id,"","","", box, doubleItem, "",movieName, mainActor,  distributer, format,"");
         }
 
-        public static DataItem createBookDataItem(String id, String bookName, String box, String publisher ){
+        @Contract(value = "_, _, _, _ -> new", pure = true)
+        public static @NotNull DataItem createBookDataItem(String id, String bookName, String box, String publisher ){
             return new DataItem(id, "", "","", box,"", publisher,"","", "", "",bookName);
         }
 

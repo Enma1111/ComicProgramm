@@ -10,7 +10,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.bartalsky.comic.Gui.BookController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.BookController">
     <items>
         <AnchorPane>
             <children>
@@ -39,12 +40,26 @@
             <children>
                 <TableView fx:id="tblBook" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
                     <columns>
-                        <TableColumn fx:id="ColID" prefWidth="75.0" text="ID" />
-                        <TableColumn fx:id="ColBook" prefWidth="139.20001220703125" text="Buch" />
-                        <TableColumn fx:id="ColNumber" prefWidth="76.00009155273438" text="Nummer" />
-                        <TableColumn fx:id="ColPlace" prefWidth="74.39996337890625" text="Ort" />
-                        <TableColumn fx:id="ColVerlag" prefWidth="92.00006103515625" text="Verlag" />
-                        <TableColumn fx:id="ColDoubleBookIn" prefWidth="117.60009765625" text="Doppbelt In" />
+                        <TableColumn fx:id="colID" prefWidth="75.0" text="ID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="id" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colBook" prefWidth="139.20001220703125" text="Buch">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="bookName" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colPlace" prefWidth="74.39996337890625" text="Ort">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="box" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colPublisher" prefWidth="92.00006103515625" text="Verlag">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="publisher" />
+                            </cellValueFactory>
+                        </TableColumn>
                     </columns>
                 </TableView>
             </children></AnchorPane>

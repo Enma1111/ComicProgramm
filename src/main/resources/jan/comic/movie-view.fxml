@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.MovieController">
+    <items>
+        <AnchorPane>
+            <children>
+                <Button fx:id="BtnMovieSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#SaveMovie" text="Speichern" />
+                <Label layoutX="19.0" layoutY="31.0" text="Film Titel" />
+                <TextField fx:id="TxtMovieName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
+                <Separator layoutX="14.0" layoutY="341.0" prefHeight="3.0" prefWidth="218.0" />
+                <Label layoutX="20.0" layoutY="99.0" text="Nummer" />
+                <TextField fx:id="TxtNumber" layoutX="20.0" layoutY="123.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="TxtBox" layoutX="20.0" layoutY="189.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="TxtDistributor" layoutX="19.0" layoutY="249.0" prefHeight="26.0" prefWidth="218.0" />
+                <Label layoutX="20.0" layoutY="160.0" text="Kiste" />
+                <Label layoutX="16.0" layoutY="223.0" text="Vertrieb" />
+                <Label layoutX="19.0" layoutY="354.0" text="Film Titel Suche" />
+                <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="385.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="BtnSearch" layoutX="18.0" layoutY="422.0" mnemonicParsing="false" onAction="#MovieSearch" text="Suche" />
+                <Separator layoutX="14.0" layoutY="464.0" prefHeight="3.0" prefWidth="218.0" />
+                <Label layoutX="19.0" layoutY="481.0" text="Löschen nach ID" />
+                <CheckBox fx:id="CkBxSureDelete" layoutX="20.0" layoutY="543.0" mnemonicParsing="false" text="Sicher" />
+                <TextField fx:id="TxtDeleteID" layoutX="19.0" layoutY="508.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="BtnDelete" layoutX="16.0" layoutY="574.0" mnemonicParsing="false" onAction="#MovieDelete" text="Löschen" />
+            <Separator layoutX="14.0" layoutY="611.0" prefHeight="3.0" prefWidth="218.0" />
+            <Button fx:id="BtnBackToOptions" layoutX="63.0" layoutY="618.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
+            </children></AnchorPane>
+        <AnchorPane prefHeight="708.0">
+            <children>
+                <TableView fx:id="tblMovie" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
+                    <columns>
+                        <TableColumn fx:id="ColID" prefWidth="75.0" text="ID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="id" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="ColMovie" prefWidth="139.20001220703125" text="Film">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="movieName" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colMainActor" prefWidth="102.40005493164062" text="Hauptdarsteller">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="mainActor" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="ColPlace" prefWidth="77.5999755859375" text="Ort">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="box" />
+                            </cellValueFactory>
+                        </TableColumn>
+
+                        <TableColumn fx:id="ColDistributor" prefWidth="100.79998779296875" text="Vertrieb">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="distributer" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colFormat" prefWidth="75.0" text="Format">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="format" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="ColDoubleMovieIn" prefWidth="80.800048828125" text="Doppbelt In">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="doubleItem" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>

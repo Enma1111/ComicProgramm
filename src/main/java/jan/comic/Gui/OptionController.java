@@ -1,6 +1,6 @@
-package jan.bartalsky.comic.Gui;
+package jan.comic.Gui;
 
-import jan.bartalsky.comic.Service.NewScene;
+import jan.comic.Service.NewScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ public class OptionController {
     public void EnterComicPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnComic.getScene().getWindow();
         try {
-            newScene.newScene("comic-view.fxml", stage, 1150, 700);
+            newScene.newScene("comic-view.fxml", stage, 1150, 700,"Comics");
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -35,7 +35,7 @@ public class OptionController {
     public void EnterBookPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnBook.getScene().getWindow();
         try {
-            newScene.newScene("book-view.fxml", stage, 1150, 700);
+            newScene.newScene("book-view.fxml", stage, 1150, 700,"Bücher");
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -45,7 +45,7 @@ public class OptionController {
     public void EnterMoviePnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnMovie.getScene().getWindow();
         try {
-            newScene.newScene("movie-view.fxml", stage, 1150, 700);
+            newScene.newScene("movie-view.fxml", stage, 1150, 700,"Filme");
         } catch (IOException e) {
             throw new IOException(e);
         }
