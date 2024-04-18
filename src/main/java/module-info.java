@@ -15,4 +15,9 @@ module jan.bartalsky.comic {
     exports jan.comic.Gui;
     opens jan.comic.Gui to javafx.fxml;
     exports jan.comic.Data;
+    opens jan.comic.Data to javafx.fxml;
+    exports jan.comic.SQLServices;
+    opens jan.comic.SQLServices to javafx.fxml;
+    exports jan.comic.TableService;
+    opens jan.comic.TableService to javafx.fxml;
 }

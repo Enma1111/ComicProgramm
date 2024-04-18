@@ -1,6 +1,6 @@
 package jan.comic.Data;
 
-import jan.comic.Service.FillTableView;
+import jan.comic.TableService.FillTableView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

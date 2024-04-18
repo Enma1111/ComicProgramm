@@ -10,16 +10,16 @@ import java.sql.*;
 public class DataReadWrite {
 
     private final XMLParser xmlParser;
+    String tableName;
 
-    public DataReadWrite(XMLParser xmlParser) {
+    public DataReadWrite(XMLParser xmlParser, String tableName) {
         this.xmlParser = xmlParser;
+        this.tableName = tableName;
     }
 
-    public Document DataRead(String tableName){
-        String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-        String query = "SELECT * FROM " + tableName;
+    public Document dataRead(String query){
 
-        try(Connection connection = DriverManager.getConnection(url)) {
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -29,10 +29,9 @@ public class DataReadWrite {
         } catch (SQLException | ParserConfigurationException | TransformerException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public void DataWrite(String[] val, String query) {
+    public void dataWrite(String query) {
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
             System.out.println(query);
@@ -42,6 +41,19 @@ public class DataReadWrite {
             if (rowsInserted > 0) {
                 System.out.println("A new row has been inserted.");
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void dataDelete(String query) {
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
+            System.out.println(query);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+
+            System.out.println("Line has been Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -2,18 +2,16 @@ package jan.comic.Gui;
 
 import jan.comic.Data.DataReadWrite;
 import jan.comic.Data.DataXmlExtract;
-import jan.comic.Service.FillTableView;
-import jan.comic.Service.NewScene;
-import jan.comic.Service.TableIInitiator;
-import jan.comic.Service.XMLParser;
+import jan.comic.SQLServices.SQLWriteQuery;
+import jan.comic.Service.*;
+import jan.comic.TableService.FillTableView;
+import jan.comic.TableService.TableIInitiator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.w3c.dom.Document;
 
 import java.io.IOException;
-import java.util.List;
 
 public class BookController {
     @FXML
@@ -23,21 +21,19 @@ public class BookController {
     @FXML
     private TextField TxtDeleteID;
     @FXML
-    private TextField TxtComicName;
-    @FXML
-    private TextField TxtNumber;
-    @FXML
     private TextField TxtSearch;
-    @FXML
-    private TextField TxtPlace;
     @FXML
     private CheckBox CkBxSureDelete;
     @FXML
     private Button BtnBookSave;
     @FXML
-    private TextField TxtPublischer;
+    private TextField TxtPublisher;
     @FXML
     private Button BtnSearch;
+    @FXML
+    private TextField TxtBox;
+    @FXML
+    private TextField TxtBookName;
     @FXML
     private TableColumn<FillTableView.DataItem, String> colPlace;
     @FXML
@@ -48,27 +44,52 @@ public class BookController {
     private TableColumn<FillTableView.DataItem, Integer> colID;
     @FXML
     private TableView<FillTableView.DataItem> tblBook;
-
+    @FXML
+    private Button BtnBackToTable;
 
     String table = "Book_Table";
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser();
-    DataReadWrite dataReadWrite = new DataReadWrite(xmlParser);
+    DataReadWrite dataReadWrite = new DataReadWrite(xmlParser, table);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
-    TableIInitiator tableIInitiator = new TableIInitiator(dataReadWrite, dataXmlExtract);
+    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
+    TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
+    WarningHelper warningHelper = new WarningHelper();
+
 
 
     @FXML
     public void initialize(){
-        tableIInitiator.initialize(tblBook, table);
+        tableIInitiator.initialize(tblBook, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 
     @FXML
     public void SaveBook(ActionEvent actionEvent) {
+        String[] val = new String[3];
+        val[0] = TxtBookName.getText();
+        val[1] = TxtBox.getText();
+        val[2] = TxtPublisher.getText();
+
+//        for (int i = 0; i < val.length; i++) {
+//            if (val[i].isEmpty()) {
+//                val[i] = "";
+//            }
+//        }
+
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
+        tableIInitiator.initialize(tblBook, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 
     @FXML
     public void BookDelete(ActionEvent actionEvent) {
+        String id = TxtDeleteID.getText();
+        if (CkBxSureDelete.isSelected()){
+            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
+            tableIInitiator.initialize(tblBook, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            CkBxSureDelete.setSelected(false);
+        }else{
+            warningHelper.deleteWarning();
+        }
     }
 
     @FXML
@@ -86,4 +107,8 @@ public class BookController {
     }
 
 
+    @FXML
+    public void BackToMainTable(ActionEvent actionEvent) {
+        tableIInitiator.initialize(tblBook, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+    }
 }

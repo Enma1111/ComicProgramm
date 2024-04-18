@@ -33,11 +33,6 @@ public class XMLParser {
 
             Element rowElement = document.createElement("row");
 
-//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-//            Transformer transformer = transformerFactory.newTransformer();
-//            DOMSource source = new DOMSource(document);
-//            StreamResult result = new StreamResult(System.out); // Output to console, change if you want to save to a file
-//            transformer.transform(source, result);
 
 
             for (int i = 1; i <= columnCount; i++) {

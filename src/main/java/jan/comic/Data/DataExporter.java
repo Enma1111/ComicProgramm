@@ -1,4 +1,4 @@
-package jan.comic.Service;
+package jan.comic.Data;
 
 
 import org.w3c.dom.Document;

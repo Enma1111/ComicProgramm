@@ -8,23 +8,21 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.BookController">
     <items>
         <AnchorPane>
             <children>
                 <Button fx:id="BtnBookSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#SaveBook" text="Speichern" />
-                <Label layoutX="19.0" layoutY="31.0" text="Buch Titel" />
-                <TextField fx:id="TxtComicName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
+                <Label layoutX="24.0" layoutY="31.0" text="Buch Titel" />
+                <TextField fx:id="TxtBookName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
                 <Separator layoutX="14.0" layoutY="341.0" prefHeight="3.0" prefWidth="218.0" />
-                <Label layoutX="20.0" layoutY="99.0" text="Nummer" />
-                <TextField fx:id="TxtNumber" layoutX="20.0" layoutY="123.0" prefHeight="26.0" prefWidth="218.0" />
-                <TextField fx:id="TxtPlace" layoutX="20.0" layoutY="189.0" prefHeight="26.0" prefWidth="218.0" />
-                <TextField fx:id="TxtPublischer" layoutX="19.0" layoutY="249.0" prefHeight="26.0" prefWidth="218.0" />
-                <Label layoutX="20.0" layoutY="160.0" text="Ort" />
-                <Label layoutX="16.0" layoutY="223.0" text="Verlag" />
+                <TextField fx:id="TxtBox" layoutX="19.0" layoutY="134.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="TxtPublisher" layoutX="16.0" layoutY="215.0" prefHeight="26.0" prefWidth="218.0" />
+                <Label layoutX="24.0" layoutY="107.0" text="Ort" />
+                <Label layoutX="25.0" layoutY="182.0" text="Verlag" />
                 <Label layoutX="19.0" layoutY="354.0" text="Buch Titel Suche" />
                 <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="385.0" prefHeight="26.0" prefWidth="218.0" />
                 <Button fx:id="BtnSearch" layoutX="18.0" layoutY="422.0" mnemonicParsing="false" onAction="#BookSearch" text="Suche" />
@@ -35,6 +33,7 @@
                 <Button fx:id="BtnDelete" layoutX="16.0" layoutY="574.0" mnemonicParsing="false" onAction="#BookDelete" text="Löschen" />
             <Button fx:id="BtnBackToOptions" layoutX="50.0" layoutY="617.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
             <Separator layoutX="17.0" layoutY="607.0" prefHeight="3.0" prefWidth="218.0" />
+            <Button fx:id="BtnBackToTable" layoutX="170.0" layoutY="422.0" mnemonicParsing="false" onAction="#BackToMainTable" text="Zurück" />
             </children></AnchorPane>
         <AnchorPane prefHeight="708.0">
             <children>

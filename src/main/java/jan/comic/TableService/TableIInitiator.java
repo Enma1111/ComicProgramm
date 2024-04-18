@@ -1,7 +1,8 @@
-package jan.comic.Service;
+package jan.comic.TableService;
 
 import jan.comic.Data.DataReadWrite;
 import jan.comic.Data.DataXmlExtract;
+import jan.comic.SQLServices.SQLWriteQuery;
 import javafx.scene.control.TableView;
 import org.w3c.dom.Document;
 
@@ -9,19 +10,21 @@ import java.util.List;
 
 public class TableIInitiator {
 
-    private final DataReadWrite dataReadWrite;
+//    private final DataReadWrite dataReadWrite;
     private final DataXmlExtract dataXmlExtract;
+//    private final SQLWriteQuery sqlWriteQuery;
 
-    public TableIInitiator(DataReadWrite dataReadWrite, DataXmlExtract dataXmlExtract) {
-        this.dataReadWrite = dataReadWrite;
+    public TableIInitiator(DataXmlExtract dataXmlExtract) {
+//        this.dataReadWrite = dataReadWrite;
         this.dataXmlExtract = dataXmlExtract;
+//        this.sqlWriteQuery = sqlWriteQuery;
     }
 
-    public void initialize(TableView<FillTableView.DataItem> DataItemTable, String table) {
-        Document document = dataReadWrite.DataRead(table);
+    public void initialize(TableView<FillTableView.DataItem> DataItemTable, String table, Document doc) {
+//        Document document = dataReadWrite.dataRead(sqlWriteQuery.readQuery());
 
-        if (document != null) {
-            List<FillTableView.DataItem> dataItems = dataXmlExtract.extractData(document,table);
+        if (doc != null) {
+            List<FillTableView.DataItem> dataItems = dataXmlExtract.extractData(doc,table);
 
             if (!dataItems.isEmpty()) {
                 FillTableView fillTableView = new FillTableView(DataItemTable);

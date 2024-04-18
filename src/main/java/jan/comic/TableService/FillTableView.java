@@ -1,4 +1,4 @@
-package jan.comic.Service;
+package jan.comic.TableService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

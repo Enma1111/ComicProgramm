@@ -38,6 +38,7 @@
             <Button fx:id="BtnBackToOptions" layoutX="62.0" layoutY="661.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
             <Label layoutX="16.0" layoutY="152.0" text="Verpackung" />
             <TextField fx:id="TxtPackaging" layoutX="16.0" layoutY="177.0" prefHeight="26.0" prefWidth="210.0" />
+            <Button fx:id="BtnBackToTable" layoutX="173.0" layoutY="469.0" mnemonicParsing="false" onAction="#BackToMainTable" text="Zurück" />
          </children>
          <padding>
             <Insets right="10.0" />
