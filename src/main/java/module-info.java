@@ -6,6 +6,7 @@ module jan.bartalsky.comic {
     requires java.desktop;
     requires org.slf4j;
     requires org.jetbrains.annotations;
+    requires java.xml;
 
 
     opens jan.comic to javafx.fxml;

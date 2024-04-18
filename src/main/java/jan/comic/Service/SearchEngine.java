@@ -1,7 +1,6 @@
 package jan.comic.Service;
 
-import jan.comic.Data.DataReadWrite;
-import jan.comic.SQLServices.TemporaryTable;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -10,7 +9,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class SearchEngine {
 
@@ -29,7 +27,7 @@ public class SearchEngine {
             .collect(Collectors.toList());
     }
 
-    private static Stream<Map<String, Object>> resultSetToStream(ResultSet resultSet) throws SQLException {
+    private static Stream<Map<String, Object>> resultSetToStream(@NotNull ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();
 
@@ -51,12 +49,12 @@ public class SearchEngine {
         }).takeWhile(row -> row != null);
     }
 
-    private static  String patternCreator(String searchTerm) {
+    private static @NotNull String patternCreator(@NotNull String searchTerm) {
 
         String patternString = "";
         String patternStart = "^";
         String patternEnd = "$";
-        String patternMiddle = "[a-zA-Z]+";
+        String patternMiddle = "[a-zA-Z0-9]+";
         String blank = "[:blank:]";
 
 
@@ -64,6 +62,7 @@ public class SearchEngine {
 
             ArrayList<String> searchTermParts = new ArrayList<>(Arrays.asList(searchTerm.split(" ")));
             ArrayList<String> searchTermLetters = new ArrayList<>();
+            System.out.println(searchTermParts.iterator());
 
             for (String part : searchTermParts) {
                 String firstLetter = part.substring(0, 1);
@@ -80,6 +79,7 @@ public class SearchEngine {
                 }
             }
             patternString += patternEnd;
+            System.out.println(patternString);
         }
         else {
             String searchTermFirstLetter = searchTerm.substring(0, 1);

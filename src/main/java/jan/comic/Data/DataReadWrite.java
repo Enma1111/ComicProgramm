@@ -17,16 +17,21 @@ public class DataReadWrite {
         this.tableName = tableName;
     }
 
-    public Document dataRead(String query){
+    public ResultSet dataRead(String query){
 
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            return xmlParser.createXml(tableName, resultSet);
+            if(!resultSet.next()){
+                return null;
+            }
 
-        } catch (SQLException | ParserConfigurationException | TransformerException e) {
+            resultSet.beforeFirst();
+            return resultSet;
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

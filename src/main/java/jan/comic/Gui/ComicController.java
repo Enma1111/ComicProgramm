@@ -14,7 +14,11 @@ import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ComicController {
     @FXML
@@ -46,7 +50,7 @@ public class ComicController {
     @FXML
     private TextField TxtNumber;
     @FXML
-    private TextField TxtPublischer;
+    private TextField TxtPublisher;
     @FXML
     private TextField TxtBox;
     @FXML
@@ -65,6 +69,8 @@ public class ComicController {
     }
 
     String table = "Comic_Table";
+    String searchTable = "TempTable";
+    String searchColumn = "Comic";
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser();
     DataReadWrite dataReadWrite = new DataReadWrite(xmlParser, table);
@@ -72,22 +78,22 @@ public class ComicController {
     SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
-    TemporaryTable temporaryTable = new TemporaryTable(dataReadWrite, sqlWriteQuery, xmlParser);
+    TemporaryTable temporaryTable = new TemporaryTable(sqlWriteQuery);
     SearchEngine searchEngine = new SearchEngine();
 
     @FXML
-    public void initialize(){
-        tableIInitiator.initialize(tblComic, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+    public void initialize() throws SQLException, ParserConfigurationException, TransformerException {
+        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 
     @FXML
-    public void SaveComic(ActionEvent actionEvent) {
+    public void SaveComic(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
         String[] val = new String[5];
         val[0] = TxtComicName.getText();
         val[1] = TxtNumber.getText();
         val[2] = TxtPackaging.getText();
         val[3] = TxtBox.getText();
-        val[4] = TxtPublischer.getText();
+        val[4] = TxtPublisher.getText();
 
 //        for (int i = 0; i < val.length; i++) {
 //            if (val[i].isEmpty()) {
@@ -96,15 +102,15 @@ public class ComicController {
 //        }
 
         dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        tableIInitiator.initialize(tblComic, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 
     @FXML
-    public void ComicDelete(ActionEvent actionEvent) {
+    public void ComicDelete(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
         String id = TxtDeleteID.getText();
         if (CkBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
-            tableIInitiator.initialize(tblComic, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
             CkBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
@@ -114,12 +120,33 @@ public class ComicController {
 
     @FXML
     public void ComicSearch(ActionEvent actionEvent) {
+
+        final String[] currentTable = {table};
+
         TxtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 
+            if(!newValue.isEmpty()){
+                String searchTerm = TxtSearch.getText();
+                Document searchValueDoc;
+                ResultSet searchValue;
+
+
+                try {
+                    if(!currentTable[0].equals(searchTable)){
+                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, table));
+                        currentTable[0] = searchTable;
+                    }else {
+                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, searchTable));
+                    }
+
+                    temporaryTable.createTemporaryTable(table, searchEngine.search(searchValue, table,searchTerm));
+                    searchValueDoc = xmlParser.createXml(table,searchValue);
+                    tableIInitiator.initialize(tblComic,table,searchValueDoc);
+                } catch (ParserConfigurationException | SQLException | TransformerException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
-        String searchTerm = TxtSearch.getText();
-        Document searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, "Comic"));
-        tableIInitiator.initialize(tblComic,table,searchValue);
     }
 
     @FXML
@@ -133,7 +160,7 @@ public class ComicController {
     }
 
     @FXML
-    public void BackToMainTable(ActionEvent actionEvent) {
-        tableIInitiator.initialize(tblComic, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+    public void BackToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 }

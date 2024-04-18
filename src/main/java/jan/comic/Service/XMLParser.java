@@ -1,5 +1,6 @@
 package jan.comic.Service;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -17,7 +18,7 @@ import java.sql.SQLException;
 
 public class XMLParser {
 
-    public Document createXml(String name, ResultSet resultSet) throws ParserConfigurationException, SQLException, TransformerException {
+    public Document createXml(String name, @NotNull ResultSet resultSet) throws ParserConfigurationException, SQLException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.newDocument();
@@ -55,7 +56,7 @@ public class XMLParser {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult("output.xml"); // Output to console, change if you want to save to a file
+            StreamResult result = new StreamResult("output.xml");
             transformer.transform(source, result);
 
 

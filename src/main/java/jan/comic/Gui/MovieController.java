@@ -12,7 +12,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MovieController {
     @FXML
@@ -55,6 +58,8 @@ public class MovieController {
     private TextField TxtMainActor;
     @FXML
     private TextField TxtFormat;
+    @FXML
+    private Button BtnBackToTable;
 
     String table = "Movie_Table";
     NewScene newScene = new NewScene();
@@ -64,16 +69,14 @@ public class MovieController {
     SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
-    @FXML
-    private Button BtnBackToTable;
 
     @FXML
-    public void initialize(){
-        tableIInitiator.initialize(tblMovie, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+    public void initialize() throws SQLException, ParserConfigurationException, TransformerException {
+        tableIInitiator.initialize(tblMovie, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 
     @FXML
-    public void MovieSearch(ActionEvent actionEvent) {
+    public void MovieSearch(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
         String[] val = new String[5];
         val[0] = TxtMovieName.getText();
         val[1] = TxtMainActor.getText();
@@ -88,15 +91,15 @@ public class MovieController {
 //        }
 
         dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        tableIInitiator.initialize(tblMovie, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblMovie, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 
     @FXML
-    public void MovieDelete(ActionEvent actionEvent) {
+    public void MovieDelete(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
         String id = TxtDeleteID.getText();
         if (CkBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
-            tableIInitiator.initialize(tblMovie, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            tableIInitiator.initialize(tblMovie, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
             CkBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
@@ -118,7 +121,7 @@ public class MovieController {
     }
 
     @FXML
-    public void BackToMainTable(ActionEvent actionEvent) {
-        tableIInitiator.initialize(tblMovie, table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+    public void BackToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+        tableIInitiator.initialize(tblMovie, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
     }
 }

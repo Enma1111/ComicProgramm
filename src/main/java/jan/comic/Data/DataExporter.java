@@ -1,6 +1,7 @@
 package jan.comic.Data;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class DataExporter {
 
-    public static void exportXmlDataToText(Document document, String outputFilePath) {
+    public static void exportXmlDataToText(@NotNull Document document, String outputFilePath) {
         try {
             FileWriter writer = new FileWriter(outputFilePath);
 

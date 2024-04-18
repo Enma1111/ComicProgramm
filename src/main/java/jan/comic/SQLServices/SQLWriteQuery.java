@@ -1,12 +1,20 @@
 package jan.comic.SQLServices;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class SQLWriteQuery {
 
     String tableName;
+    String tempTable = "TempTable";
 
-    String query;
+    private String query;
+    private final List<String> comicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
+    private final List<String> movieColumns = Arrays.asList("Film","Hauptdarsteller,Ort,Vertrieb,Format");
+    private final List<String> bookColumns = Arrays.asList("Buch","Ort","Verlag");
 
     public SQLWriteQuery(String tableName) {
         this.tableName = tableName;
@@ -16,18 +24,17 @@ public class SQLWriteQuery {
         return tableName;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
     public String readQuery(String tableName){
         query = "SELECT * FROM " + tableName + ";";
         System.out.println(query);
         return query;
     }
 
-    public String searchQuery(String searchTerm, String colName){
-        if (searchTerm.length() == 1){
+    public String searchQuery(String searchTerm, String colName, @NotNull String searchTable){
+        if (searchTable.equals(tempTable)){
+            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
+            System.out.println(query);
+        } else if (searchTerm.length() == 1){
             searchTerm = searchTerm + "%";
         }
         query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
@@ -81,14 +88,14 @@ public class SQLWriteQuery {
         return query = "DELETE FROM " + tableName + " WHERE ID = " + id + ";";
     }
 
-    public String poulateTempTableQuery(String tempTable, List<String> columnNames) {
+    public String populateTempTableQuery(String tempTable) {
         StringBuilder insertQuery = new StringBuilder("INSERT INTO " + tempTable + " (");
         StringBuilder values = new StringBuilder("VALUES (");
 
-        for (int i = 0; i < columnNames.size(); i++) {
-            insertQuery.append(columnNames.get(i));
+        for (int i = 0; i < comicColumns.size(); i++) {
+            insertQuery.append(comicColumns.get(i));
             values.append("?");
-            if (i < columnNames.size() - 1) {
+            if (i < comicColumns.size() - 1) {
                 insertQuery.append(", ");
                 values.append(", ");
             }

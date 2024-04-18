@@ -2,6 +2,7 @@ package jan.comic.Data;
 
 import jan.comic.TableService.FillTableView;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class DataXmlExtract {
 
-    public List<FillTableView.DataItem> extractData(Document document, String table){
+    public List<FillTableView.DataItem> extractData(@NotNull Document document, @NotNull String table){
         List<FillTableView.DataItem> dataItems = new ArrayList<>();
         NodeList rowList = document.getDocumentElement().getElementsByTagName("row");
 
@@ -42,7 +43,7 @@ public class DataXmlExtract {
             return dataItems;
     }
 
-    private FillTableView.DataItem createComicDataItem(Element row) {
+    private FillTableView.@NotNull DataItem createComicDataItem(Element row) {
         String id = getTextContentFromElement(row, "ID");
         String comicName = getTextContentFromElement(row, "Comic");
         String number = getTextContentFromElement(row, "Nummer");
@@ -53,7 +54,7 @@ public class DataXmlExtract {
         return FillTableView.DataItem.createComicDataItem(id, comicName, number, packaging, box, doubleComicIn, publisher);
     }
 
-    private FillTableView.DataItem createMovieDataItem(Element row) {
+    private FillTableView.@NotNull DataItem createMovieDataItem(Element row) {
         String id = getTextContentFromElement(row, "ID");
         String movieName = getTextContentFromElement(row, "Film");
         String mainActor = getTextContentFromElement(row, "Hauptdarsteller");
@@ -64,7 +65,7 @@ public class DataXmlExtract {
         return FillTableView.DataItem.createMovieDataItem(id, movieName, mainActor, box, distributor, format, doubleItem);
     }
 
-    private FillTableView.DataItem createBookDataItem(Element row) {
+    private FillTableView.@NotNull DataItem createBookDataItem(Element row) {
         String id = getTextContentFromElement(row, "ID");
         String bookName = getTextContentFromElement(row, "Buch");
         String box = getTextContentFromElement(row, "Ort");
@@ -72,7 +73,7 @@ public class DataXmlExtract {
         return FillTableView.DataItem.createBookDataItem(id, bookName, box, publisher);
     }
 
-    private String getTextContentFromElement(Element parentElement, String tagName) {
+    private String getTextContentFromElement(@NotNull Element parentElement, String tagName) {
         Element element = (Element) parentElement.getElementsByTagName(tagName).item(0);
         return element != null ? element.getTextContent() : "";
     }
