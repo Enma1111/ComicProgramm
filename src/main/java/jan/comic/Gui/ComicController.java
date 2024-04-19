@@ -22,47 +22,47 @@ import java.sql.SQLException;
 
 public class ComicController {
     @FXML
-    private Button BtnDelete;
+    private TableColumn <FillTableView.DataItem, String>  colNumber;
     @FXML
-    private TableColumn <FillTableView.DataItem, String>  ColNumber;
+    private TableColumn <FillTableView.DataItem, String>  colDoubleComicIn;
     @FXML
-    private TableColumn <FillTableView.DataItem, String>  ColDoubleComicIn;
+    private TableColumn <FillTableView.DataItem, String>  colBox;
     @FXML
-    private TextField TxtDeleteID;
+    private TableColumn <FillTableView.DataItem, String>  colComic;
     @FXML
-    private TableColumn <FillTableView.DataItem, String>  ColBox;
+    private TableColumn <FillTableView.DataItem, String>  colVerlag;
     @FXML
-    private TableColumn <FillTableView.DataItem, String>  ColComic;
-    @FXML
-    private Button BtnComicSave;
-    @FXML
-    private TextField TxtComicName;
-    @FXML
-    private TextField TxtSearch;
-    @FXML
-    private CheckBox CkBxSureDelete;
-    @FXML
-    private Button BtnSearch;
-    @FXML
-    private TableColumn <FillTableView.DataItem, String>  ColVerlag;
-    @FXML
-    private TableColumn <FillTableView.DataItem, Integer> ColID;
-    @FXML
-    private TextField TxtNumber;
-    @FXML
-    private TextField TxtPublisher;
-    @FXML
-    private TextField TxtBox;
-    @FXML
-    private Button BtnBackToOptions;
+    private TableColumn <FillTableView.DataItem, Integer> colID;
     @FXML
     private TableView<FillTableView.DataItem> tblComic;
     @FXML
-    private TableColumn <FillTableView.DataItem, String> ColPackaging;
+    private TableColumn <FillTableView.DataItem, String> colPackaging;
     @FXML
-    private TextField TxtPackaging;
+    private TextField txtPackaging;
     @FXML
-    private Button BtnBackToTable;
+    private Button btnBackToOptions;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private TextField txtNumber;
+    @FXML
+    private TextField txtComicName;
+    @FXML
+    private Button btnBackToTable;
+    @FXML
+    private TextField txtDeleteID;
+    @FXML
+    private Button btnDelete;
+    @FXML
+    private Button btnComicSave;
+    @FXML
+    private CheckBox ckBxSureDelete;
+    @FXML
+    private TextField txtBox;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private TextField txtPublisher;
 
     public void setTblComic(TableView<FillTableView.DataItem> tblComic) {
         this.tblComic = tblComic;
@@ -72,8 +72,8 @@ public class ComicController {
     String searchTable = "TempTable";
     String searchColumn = "Comic";
     NewScene newScene = new NewScene();
-    XMLParser xmlParser = new XMLParser();
-    DataReadWrite dataReadWrite = new DataReadWrite(xmlParser, table);
+    XMLParser xmlParser = new XMLParser(table);
+    DataReadWrite dataReadWrite = new DataReadWrite(table);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
     SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
@@ -83,17 +83,20 @@ public class ComicController {
 
     @FXML
     public void initialize() throws SQLException, ParserConfigurationException, TransformerException {
-        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+        String query = sqlWriteQuery.readQuery(table);
+        ResultSet result = dataReadWrite.dataRead(query);
+        Document doc = xmlParser.createXml(result);
+        tableIInitiator.initialize(tblComic, table, doc);
     }
 
     @FXML
-    public void SaveComic(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+    public void saveComic(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
         String[] val = new String[5];
-        val[0] = TxtComicName.getText();
-        val[1] = TxtNumber.getText();
-        val[2] = TxtPackaging.getText();
-        val[3] = TxtBox.getText();
-        val[4] = TxtPublisher.getText();
+        val[0] = txtComicName.getText();
+        val[1] = txtNumber.getText();
+        val[2] = txtPackaging.getText();
+        val[3] = txtBox.getText();
+        val[4] = txtPublisher.getText();
 
 //        for (int i = 0; i < val.length; i++) {
 //            if (val[i].isEmpty()) {
@@ -102,16 +105,18 @@ public class ComicController {
 //        }
 
         dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+        Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblComic, table, doc);
     }
 
     @FXML
-    public void ComicDelete(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
-        String id = TxtDeleteID.getText();
-        if (CkBxSureDelete.isSelected()){
+    public void comicDelete(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+        String id = txtDeleteID.getText();
+        if (ckBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
-            tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
-            CkBxSureDelete.setSelected(false);
+            Document doc = xmlParser.createXml( dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            tableIInitiator.initialize(tblComic, table, doc);
+            ckBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
         }
@@ -119,39 +124,39 @@ public class ComicController {
     }
 
     @FXML
-    public void ComicSearch(ActionEvent actionEvent) {
+    public void comicSearch(ActionEvent actionEvent) {
 
-        final String[] currentTable = {table};
-
-        TxtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if(!newValue.isEmpty()){
-                String searchTerm = TxtSearch.getText();
-                Document searchValueDoc;
-                ResultSet searchValue;
-
-
-                try {
-                    if(!currentTable[0].equals(searchTable)){
-                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, table));
-                        currentTable[0] = searchTable;
-                    }else {
-                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, searchTable));
-                    }
-
-                    temporaryTable.createTemporaryTable(table, searchEngine.search(searchValue, table,searchTerm));
-                    searchValueDoc = xmlParser.createXml(table,searchValue);
-                    tableIInitiator.initialize(tblComic,table,searchValueDoc);
-                } catch (ParserConfigurationException | SQLException | TransformerException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+//        final String[] currentTable = {table};
+//
+//        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//
+//            if(!newValue.isEmpty()){
+//                String searchTerm = txtSearch.getText();
+//                Document searchValueDoc;
+//                ResultSet searchValue;
+//
+//
+//                try {
+//                    if(!currentTable[0].equals(searchTable)){
+//                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, table));
+//                        currentTable[0] = searchTable;
+//                    }else {
+//                        searchValue = dataReadWrite.dataRead(sqlWriteQuery.searchQuery(searchTerm, searchColumn, searchTable));
+//                    }
+//
+//                    temporaryTable.createTemporaryTable(table, searchEngine.search(searchValue, table,searchTerm));
+//                    searchValueDoc = xmlParser.createXml(searchValue);
+//                    tableIInitiator.initialize(tblComic,table,searchValueDoc);
+//                } catch (ParserConfigurationException | SQLException | TransformerException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        });
     }
 
     @FXML
-    public void BackToOptions(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) BtnBackToOptions.getScene().getWindow();
+    public void backToOptions(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
         try {
             newScene.newScene("option-view.fxml", stage, 200, 200,"Optionen");
         } catch (IOException e) {
@@ -159,8 +164,9 @@ public class ComicController {
         }
     }
 
-    @FXML
-    public void BackToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
-        tableIInitiator.initialize(tblComic, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+
+    public void backToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+        Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblComic, table, doc);
     }
 }

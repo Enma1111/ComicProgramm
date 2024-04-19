@@ -10,7 +10,9 @@ import java.util.Map;
 public class TemporaryTable {
 
     private final SQLWriteQuery sqlWriteQuery;
-    private static final String tempTable = "TempTable";
+    private static final String Temp_Table = "TempTable";
+    static final String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+
 
     public TemporaryTable(SQLWriteQuery sqlWriteQuery) {
         this.sqlWriteQuery = sqlWriteQuery;
@@ -19,13 +21,13 @@ public class TemporaryTable {
     public void createTemporaryTable(String tableName, List<Map<String, Object>> searchList) throws SQLException {
 
         String query = createTemporaryTableQuery((tableName));
-        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
+        try(Connection connection = DriverManager.getConnection(url)) {
 //          Erstellung der Temporaeren Tabelle
             try (PreparedStatement preparedStatementForTempTable = connection.prepareStatement(query)) {
 
                 preparedStatementForTempTable.executeUpdate();
             }
-            insertIntoTempTable(connection, searchList, sqlWriteQuery.populateTempTableQuery(tempTable));
+            insertIntoTempTable(connection, searchList, sqlWriteQuery.populateTempTableQuery(Temp_Table));
         }
     }
 

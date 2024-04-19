@@ -1,35 +1,24 @@
 package jan.comic.Data;
 
-import jan.comic.Service.XMLParser;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 public class DataReadWrite {
 
-    private final XMLParser xmlParser;
     String tableName;
+    static final String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+    private static final Logger logger = LoggerFactory.getLogger(DataReadWrite.class);
 
-    public DataReadWrite(XMLParser xmlParser, String tableName) {
-        this.xmlParser = xmlParser;
+    public DataReadWrite(String tableName) {
         this.tableName = tableName;
     }
 
     public ResultSet dataRead(String query){
 
-        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
-
+        try(Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(!resultSet.next()){
-                return null;
-            }
-
-            resultSet.beforeFirst();
-            return resultSet;
+            return preparedStatement.executeQuery();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -38,27 +27,27 @@ public class DataReadWrite {
 
     public void dataWrite(String query) {
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
-            System.out.println(query);
+        try (Connection connection = DriverManager.getConnection(url)) {
+            logger.info(query);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("A new row has been inserted.");
+                logger.info("A new row has been inserted.");
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void dataDelete(String query) {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db")) {
-            System.out.println(query);
+        try (Connection connection = DriverManager.getConnection(url)) {
 
+            logger.info(query);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
+            logger.info("Line has been Deleted");
 
-            System.out.println("Line has been Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

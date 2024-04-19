@@ -1,15 +1,16 @@
 package jan.comic.SQLServices;
 
 import org.jetbrains.annotations.NotNull;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class SQLWriteQuery {
 
     String tableName;
     String tempTable = "TempTable";
+    private static final Logger logger = LoggerFactory.getLogger(SQLWriteQuery.class);
 
     private String query;
     private final List<String> comicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
@@ -26,19 +27,19 @@ public class SQLWriteQuery {
 
     public String readQuery(String tableName){
         query = "SELECT * FROM " + tableName + ";";
-        System.out.println(query);
+        logger.info(query);
         return query;
     }
 
     public String searchQuery(String searchTerm, String colName, @NotNull String searchTable){
         if (searchTable.equals(tempTable)){
             query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
-            System.out.println(query);
+            logger.info(query);
         } else if (searchTerm.length() == 1){
             searchTerm = searchTerm + "%";
         }
         query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
-        System.out.println(query);
+        logger.info(query);
         return query;
     }
 
@@ -77,7 +78,7 @@ public class SQLWriteQuery {
                         "(" + bookName + "," + box + "," + publisher + ")";
             }
             default -> {
-                System.out.println("Unknown table name: " + tableName);
+                logger.warn("Unknown table name: {}", tableName);
                 return "";
             }
         }
@@ -85,7 +86,7 @@ public class SQLWriteQuery {
     }
 
     public String deleteQuery(String id){
-        return query = "DELETE FROM " + tableName + " WHERE ID = " + id + ";";
+        return "DELETE FROM " + tableName + " WHERE ID = " + id + ";";
     }
 
     public String populateTempTableQuery(String tempTable) {

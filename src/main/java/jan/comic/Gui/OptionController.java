@@ -22,7 +22,7 @@ public class OptionController {
     NewScene newScene = new NewScene();
 
     @FXML
-    public void EnterComicPnl(ActionEvent actionEvent) throws IOException {
+    public void enterComicPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnComic.getScene().getWindow();
         try {
             newScene.newScene("comic-view.fxml", stage, 1150, 700,"Comics");
@@ -32,7 +32,7 @@ public class OptionController {
     }
 
     @FXML
-    public void EnterBookPnl(ActionEvent actionEvent) throws IOException {
+    public void enterBookPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnBook.getScene().getWindow();
         try {
             newScene.newScene("book-view.fxml", stage, 1150, 700,"Bücher");
@@ -42,7 +42,7 @@ public class OptionController {
     }
 
     @FXML
-    public void EnterMoviePnl(ActionEvent actionEvent) throws IOException {
+    public void enterMoviePnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnMovie.getScene().getWindow();
         try {
             newScene.newScene("movie-view.fxml", stage, 1150, 700,"Filme");

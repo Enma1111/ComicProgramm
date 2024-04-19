@@ -5,12 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class FillTableView {
 
     private final TableView<DataItem> tableView;
+    private static final Logger logger = LoggerFactory.getLogger(FillTableView.class);
 
     public FillTableView(TableView<DataItem> tableView) {
         this.tableView = tableView;
@@ -117,7 +120,7 @@ public class FillTableView {
         if (tableView != null) {
             tableView.setItems(items);
         }else {
-            System.err.println("TableView instance is null!");
+            logger.error("TableView instance is null!");
         }
     }
 }

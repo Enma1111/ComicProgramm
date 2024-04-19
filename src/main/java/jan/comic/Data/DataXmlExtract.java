@@ -3,6 +3,8 @@ package jan.comic.Data;
 import jan.comic.TableService.FillTableView;
 
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataXmlExtract {
+
+    private static final Logger logger = LoggerFactory.getLogger(DataXmlExtract.class);
 
     public List<FillTableView.DataItem> extractData(@NotNull Document document, @NotNull String table){
         List<FillTableView.DataItem> dataItems = new ArrayList<>();
@@ -38,7 +42,7 @@ public class DataXmlExtract {
                         dataItems.add(dataItem);
                     }
                 }
-                default -> System.out.println("Unknown table");
+                default -> logger.warn("Unknown table");
             }
             return dataItems;
     }

@@ -1,6 +1,9 @@
 package jan.comic.Service;
 
+import jan.comic.TableService.TableIInitiator;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -11,6 +14,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SearchEngine {
+
+    private static final Logger logger = LoggerFactory.getLogger(SearchEngine.class);
 
     public List<Map<String, Object>> search (ResultSet resultSet, String tableName, String searchTerm) throws SQLException {
 
@@ -62,7 +67,7 @@ public class SearchEngine {
 
             ArrayList<String> searchTermParts = new ArrayList<>(Arrays.asList(searchTerm.split(" ")));
             ArrayList<String> searchTermLetters = new ArrayList<>();
-            System.out.println(searchTermParts.iterator());
+            logger.info(String.valueOf(searchTermParts.iterator()));
 
             for (String part : searchTermParts) {
                 String firstLetter = part.substring(0, 1);
@@ -79,7 +84,7 @@ public class SearchEngine {
                 }
             }
             patternString += patternEnd;
-            System.out.println(patternString);
+            logger.info(patternString);
         }
         else {
             String searchTermFirstLetter = searchTerm.substring(0, 1);

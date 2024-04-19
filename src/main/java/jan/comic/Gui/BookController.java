@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.w3c.dom.Document;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -52,8 +53,8 @@ public class BookController {
 
     String table = "Book_Table";
     NewScene newScene = new NewScene();
-    XMLParser xmlParser = new XMLParser();
-    DataReadWrite dataReadWrite = new DataReadWrite(xmlParser, table);
+    XMLParser xmlParser = new XMLParser(table);
+    DataReadWrite dataReadWrite = new DataReadWrite(table);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
     SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
@@ -63,7 +64,8 @@ public class BookController {
 
     @FXML
     public void initialize() throws SQLException, ParserConfigurationException, TransformerException {
-        tableIInitiator.initialize(tblBook, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+        Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblBook, table, doc);
     }
 
     @FXML
@@ -80,7 +82,8 @@ public class BookController {
 //        }
 
         dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        tableIInitiator.initialize(tblBook, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+        Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblBook, table, doc);
     }
 
     @FXML
@@ -88,7 +91,8 @@ public class BookController {
         String id = TxtDeleteID.getText();
         if (CkBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
-            tableIInitiator.initialize(tblBook, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+            Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            tableIInitiator.initialize(tblBook, table, doc);
             CkBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
@@ -111,6 +115,7 @@ public class BookController {
 
     @FXML
     public void BackToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
-        tableIInitiator.initialize(tblBook, table, xmlParser.createXml(table,dataReadWrite.dataRead(sqlWriteQuery.readQuery(table))));
+        Document doc = xmlParser.createXml(dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblBook, table, doc);
     }
 }
