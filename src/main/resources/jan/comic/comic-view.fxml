@@ -20,8 +20,8 @@
             <Label layoutX="19.0" layoutY="214.0" text="Kiste" />
             <Label layoutX="15.0" layoutY="274.0" text="Verlag" />
             <Label layoutX="15.0" layoutY="396.0" text="Comic Titel Suche" />
-            <TextField fx:id="txtSearch" layoutX="16.0" layoutY="425.0" prefHeight="26.0" prefWidth="210.0" />
-            <Button fx:id="btnSearch" layoutX="20.0" layoutY="469.0" mnemonicParsing="false" onAction="#comicSearch" text="Suche" />
+            <TextField fx:id="txtSearch" layoutX="16.0" layoutY="425.0" onAction="#comicSearch" prefHeight="26.0" prefWidth="210.0" />
+            <Button fx:id="btnSearch" layoutX="20.0" layoutY="469.0" mnemonicParsing="false" text="Suche" />
             <Separator layoutX="12.0" layoutY="502.0" prefHeight="3.0" prefWidth="218.0" />
             <Label layoutX="18.0" layoutY="512.0" text="Löschen nach ID" />
             <CheckBox fx:id="ckBxSureDelete" layoutX="16.0" layoutY="576.0" mnemonicParsing="false" text="Sicher" />

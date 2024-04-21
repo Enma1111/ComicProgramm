@@ -1,6 +1,5 @@
 package jan.comic.Service;
 
-import jan.comic.TableService.TableIInitiator;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//Klasse nicht fertig so wie Ihre zugehörigen Funktionen in den Controllern und anderen Klassen
+
 public class SearchEngine {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchEngine.class);
@@ -22,7 +23,6 @@ public class SearchEngine {
         String patternString = SearchEngine.patternCreator(searchTerm);
 
         Pattern pattern = Pattern.compile(patternString);
-
 
         Stream<Map<String, Object>> resultSetStream = SearchEngine.resultSetToStream(resultSet);
 

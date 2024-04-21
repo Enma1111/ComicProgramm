@@ -15,7 +15,7 @@
     <items>
         <AnchorPane>
             <children>
-                <Button fx:id="BtnMovieSave" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#SaveMovie" text="Speichern" />
+                <Button fx:id="BtnMovieSave" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#saveMovie" text="Speichern" />
                 <Label layoutX="19.0" layoutY="31.0" text="Film Titel" />
                 <TextField fx:id="TxtMovieName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
                 <Separator layoutX="20.0" layoutY="369.0" prefHeight="3.0" prefWidth="218.0" />
@@ -27,17 +27,17 @@
                 <Label layoutX="21.0" layoutY="209.0" text="Vertrieb" />
                 <Label layoutX="19.0" layoutY="383.0" text="Film Titel Suche" />
                 <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="409.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="BtnSearch" layoutX="18.0" layoutY="442.0" mnemonicParsing="false" onAction="#MovieSearch" text="Suche" />
+                <Button fx:id="BtnSearch" layoutX="18.0" layoutY="442.0" mnemonicParsing="false" onAction="#movieSearch" text="Suche" />
                 <Separator layoutX="19.0" layoutY="482.0" prefHeight="3.0" prefWidth="218.0" />
                 <Label layoutX="22.0" layoutY="495.0" text="Löschen nach ID" />
                 <CheckBox fx:id="CkBxSureDelete" layoutX="20.0" layoutY="560.0" mnemonicParsing="false" text="Sicher" />
                 <TextField fx:id="TxtDeleteID" layoutX="19.0" layoutY="526.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="BtnDelete" layoutX="20.0" layoutY="592.0" mnemonicParsing="false" onAction="#MovieDelete" text="Löschen" />
+                <Button fx:id="BtnDelete" layoutX="20.0" layoutY="592.0" mnemonicParsing="false" onAction="#movieDelete" text="Löschen" />
             <Separator layoutX="16.0" layoutY="628.0" prefHeight="3.0" prefWidth="218.0" />
-            <Button fx:id="BtnBackToOptions" layoutX="63.0" layoutY="647.0" mnemonicParsing="false" onAction="#BackToOptions" text="Zurück zur Auswahl" />
+            <Button fx:id="BtnBackToOptions" layoutX="63.0" layoutY="647.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl" />
             <TextField fx:id="TxtFormat" layoutX="18.0" layoutY="293.0" prefHeight="26.0" prefWidth="225.0" />
             <Label layoutX="23.0" layoutY="268.0" text="Format" />
-            <Button fx:id="BtnBackToTable" layoutX="182.0" layoutY="442.0" mnemonicParsing="false" onAction="#BackToMainTable" text="Zurück" />
+            <Button fx:id="BtnBackToTable" layoutX="182.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück" />
             </children></AnchorPane>
         <AnchorPane prefHeight="708.0">
             <children>

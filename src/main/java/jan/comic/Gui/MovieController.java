@@ -1,122 +1,113 @@
 package jan.comic.Gui;
 
+import jan.comic.Data.DataItem;
+import jan.comic.Service.NewScene;
+import jan.comic.Service.SearchEngine;
+import jan.comic.Service.WarningHelper;
+import jan.comic.Service.XMLParser;
+import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
 import jan.comic.Data.DataXmlExtract;
 import jan.comic.SQLServices.SQLWriteQuery;
-import jan.comic.Service.*;
-import jan.comic.TableService.FillTableView;
-import jan.comic.TableService.TableIInitiator;
+import jan.comic.SQLServices.TemporaryTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.w3c.dom.Document;
-
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class MovieController {
     @FXML
-    private TableColumn<FillTableView.DataItem, String>  ColPlace;
+    private TableColumn<DataItem, String> colPlace;
     @FXML
-    private TableColumn<FillTableView.DataItem, String> ColDoubleMovieIn;
+    private TableColumn<DataItem, String> colDoubleMovieIn;
     @FXML
-    private Button BtnDelete;
+    private Button btnDelete;
     @FXML
-    private Button BtnBackToOptions;
+    private Button btnBackToOptions;
     @FXML
-    private TextField TxtDeleteID;
+    private TextField txtDeleteID;
     @FXML
-    private TableColumn<FillTableView.DataItem, String>  ColDistributor;
+    private TableColumn<DataItem, String>  colDistributor;
     @FXML
-    private TableColumn<FillTableView.DataItem, String>  ColMovie;
+    private TableColumn<DataItem, String>  colMovie;
     @FXML
-    private TextField TxtSearch;
+    private TextField txtSearch;
     @FXML
-    private TextField TxtDistributor;
+    private TextField txtDistributor;
     @FXML
-    private CheckBox CkBxSureDelete;
+    private CheckBox ckBxSureDelete;
     @FXML
-    private TextField TxtBox;
+    private TextField txtBox;
     @FXML
-    private Button BtnSearch;
+    private Button btnSearch;
     @FXML
-    private TableColumn<FillTableView.DataItem, Integer>  ColID;
+    private TableColumn<DataItem, Integer>  colID;
     @FXML
-    private TableColumn<FillTableView.DataItem, String> colMainActor;
+    private TableColumn<DataItem, String> colMainActor;
     @FXML
-    private TableView<FillTableView.DataItem> tblMovie;
+    private TableView<DataItem> tblMovie;
     @FXML
-    private TableColumn<FillTableView.DataItem, String> colFormat;
+    private TableColumn<DataItem, String> colFormat;
     @FXML
-    private Button BtnMovieSave;
+    private Button btnMovieSave;
     @FXML
-    private TextField TxtMovieName;
+    private TextField txtMovieName;
     @FXML
-    private TextField TxtMainActor;
+    private TextField txtMainActor;
     @FXML
-    private TextField TxtFormat;
+    private TextField txtFormat;
     @FXML
-    private Button BtnBackToTable;
+    private Button btnBackToTable;
 
     String table = "Movie_Table";
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
-    DataReadWrite dataReadWrite = new DataReadWrite(table);
-    DataXmlExtract dataXmlExtract = new DataXmlExtract();
     SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
+    TemporaryTable temporaryTable = new TemporaryTable(sqlWriteQuery);
+    SearchEngine searchEngine = new SearchEngine();
+    DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser,temporaryTable,searchEngine,sqlWriteQuery);
+    DataXmlExtract dataXmlExtract = new DataXmlExtract();
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
 
     @FXML
-    public void initialize() throws SQLException, ParserConfigurationException, TransformerException {
-        Document doc = xmlParser.createXml( dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-        tableIInitiator.initialize(tblMovie, table, doc);
+    public void initialize() {
+        tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 
     @FXML
-    public void MovieSearch(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
+    public void movieSearch(ActionEvent actionEvent) {
         String[] val = new String[5];
-        val[0] = TxtMovieName.getText();
-        val[1] = TxtMainActor.getText();
-        val[2] = TxtBox.getText();
-        val[3] = TxtDistributor.getText();
-        val[4] = TxtFormat.getText();
-
-//        for (int i = 0; i < val.length; i++) {
-//            if (val[i].isEmpty()) {
-//                val[i] = "";
-//            }
-//        }
+        val[0] = txtMovieName.getText();
+        val[1] = txtMainActor.getText();
+        val[2] = txtBox.getText();
+        val[3] = txtDistributor.getText();
+        val[4] = txtFormat.getText();
 
         dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        Document doc = xmlParser.createXml( dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-        tableIInitiator.initialize(tblMovie, table, doc);
+        tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 
     @FXML
-    public void MovieDelete(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
-        String id = TxtDeleteID.getText();
-        if (CkBxSureDelete.isSelected()){
+    public void movieDelete(ActionEvent actionEvent) {
+        String id = txtDeleteID.getText();
+        if (ckBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
-            Document doc = xmlParser.createXml( dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-            tableIInitiator.initialize(tblMovie, table, doc);
-            CkBxSureDelete.setSelected(false);
+            tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            ckBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
         }
     }
 
     @FXML
-    public void SaveMovie(ActionEvent actionEvent) {
+    public void saveMovie(ActionEvent actionEvent) {
     }
 
     @FXML
-    public void BackToOptions(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) BtnBackToOptions.getScene().getWindow();
+    public void backToOptions(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
         try {
             newScene.newScene("option-view.fxml", stage, 200, 200,"Optionen");
         } catch (IOException e) {
@@ -125,8 +116,7 @@ public class MovieController {
     }
 
     @FXML
-    public void BackToMainTable(ActionEvent actionEvent) throws SQLException, ParserConfigurationException, TransformerException {
-        Document doc = xmlParser.createXml( dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-        tableIInitiator.initialize(tblMovie, table, doc);
+    public void backToMainTable(ActionEvent actionEvent) {
+        tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 }

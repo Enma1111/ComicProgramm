@@ -17,6 +17,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Objects;
 
+//Klasse um aus ein ResultSet in ein XML umzuwandeln
+
 public class XMLParser {
 
     private final String name;
@@ -38,9 +40,9 @@ public class XMLParser {
         int columnCount = metaData.getColumnCount();
 
         while (resultSet.next()) {
-
+//      Child Element Row wird erstellt
             Element rowElement = document.createElement("row");
-
+//      Child Column Elemente werden erstellt
             for (int i = 1; i <= columnCount; i++) {
                 String columnName = metaData.getColumnName(i);
                 String columnValue = resultSet.getString(i);
@@ -56,8 +58,8 @@ public class XMLParser {
             rootElement.appendChild(rowElement);
 
         }
-
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//      Dient dazu das XML Document anzuspeicheren
+        TransformerFactory transformerFactory = new com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(document);
         StreamResult result = new StreamResult("output.xml");

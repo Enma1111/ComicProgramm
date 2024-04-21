@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.List;
 
+//Diese Klasse dient dazu verschiedene SQL Abfragen zu erstellen
+
 public class SQLWriteQuery {
 
     String tableName;
@@ -27,19 +29,20 @@ public class SQLWriteQuery {
 
     public String readQuery(String tableName){
         query = "SELECT * FROM " + tableName + ";";
-        logger.info(query);
         return query;
     }
 
-    public String searchQuery(String searchTerm, String colName, @NotNull String searchTable){
+    public String searchQuery(@NotNull String searchTerm, String colName, @NotNull String searchTable){
+        String searchTermUpper = searchTerm.substring(0,1).toUpperCase();
         if (searchTable.equals(tempTable)){
-            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
+            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "%';";
             logger.info(query);
-        } else if (searchTerm.length() == 1){
-            searchTerm = searchTerm + "%";
+        } else if (searchTermUpper.length() == 1){
+            searchTermUpper = searchTermUpper + "%";
+            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTermUpper + "';";
+            logger.info(query);
         }
-        query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "';";
-        logger.info(query);
+
         return query;
     }
 

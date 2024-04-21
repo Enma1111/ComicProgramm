@@ -13,17 +13,17 @@ import java.io.IOException;
 public class OptionController {
 
     @FXML
-    private Button BtnMovie;
+    private Button btnMovie;
     @FXML
-    private Button BtnComic;
+    private Button btnComic;
     @FXML
-    private Button BtnBook;
+    private Button btnBook;
 
     NewScene newScene = new NewScene();
 
     @FXML
     public void enterComicPnl(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) BtnComic.getScene().getWindow();
+        Stage stage = (Stage) btnComic.getScene().getWindow();
         try {
             newScene.newScene("comic-view.fxml", stage, 1150, 700,"Comics");
         } catch (IOException e) {
@@ -33,7 +33,7 @@ public class OptionController {
 
     @FXML
     public void enterBookPnl(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) BtnBook.getScene().getWindow();
+        Stage stage = (Stage) btnBook.getScene().getWindow();
         try {
             newScene.newScene("book-view.fxml", stage, 1150, 700,"Bücher");
         } catch (IOException e) {
@@ -43,7 +43,7 @@ public class OptionController {
 
     @FXML
     public void enterMoviePnl(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) BtnMovie.getScene().getWindow();
+        Stage stage = (Stage) btnMovie.getScene().getWindow();
         try {
             newScene.newScene("movie-view.fxml", stage, 1150, 700,"Filme");
         } catch (IOException e) {

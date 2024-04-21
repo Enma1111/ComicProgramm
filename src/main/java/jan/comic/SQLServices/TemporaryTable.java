@@ -11,7 +11,8 @@ public class TemporaryTable {
 
     private final SQLWriteQuery sqlWriteQuery;
     private static final String Temp_Table = "TempTable";
-    static final String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+//    static final String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+    static final String url = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
 
 
     public TemporaryTable(SQLWriteQuery sqlWriteQuery) {
@@ -22,11 +23,12 @@ public class TemporaryTable {
 
         String query = createTemporaryTableQuery((tableName));
         try(Connection connection = DriverManager.getConnection(url)) {
-//          Erstellung der Temporaeren Tabelle
-            try (PreparedStatement preparedStatementForTempTable = connection.prepareStatement(query)) {
 
-                preparedStatementForTempTable.executeUpdate();
-            }
+//          Erstellung der Temporaeren Tabelle
+
+            PreparedStatement preparedStatementForTempTable = connection.prepareStatement(query);
+            preparedStatementForTempTable.executeUpdate();
+
             insertIntoTempTable(connection, searchList, sqlWriteQuery.populateTempTableQuery(Temp_Table));
         }
     }

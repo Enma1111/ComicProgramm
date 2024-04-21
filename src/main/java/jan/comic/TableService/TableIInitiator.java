@@ -1,6 +1,7 @@
 package jan.comic.TableService;
 
 
+import jan.comic.Data.DataItem;
 import jan.comic.Data.DataXmlExtract;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
@@ -18,10 +19,10 @@ public class TableIInitiator {
         this.dataXmlExtract = dataXmlExtract;
     }
 
-    public void initialize(TableView<FillTableView.DataItem> dataItemTable, String table, Document doc) {
+    public void initialize(TableView<DataItem> dataItemTable, String table, Document doc) {
 
         if (doc != null) {
-            List<FillTableView.DataItem> dataItems = dataXmlExtract.extractData(doc,table);
+            List<DataItem> dataItems = dataXmlExtract.extractData(doc,table);
 
             if (!dataItems.isEmpty()) {
 
