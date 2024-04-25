@@ -1,4 +1,4 @@
-package jan.comic.Service;
+package jan.comic.Scene;
 
 import jan.comic.ComicApplication;
 import javafx.fxml.FXMLLoader;

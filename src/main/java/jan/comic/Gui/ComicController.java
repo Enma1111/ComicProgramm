@@ -1,21 +1,27 @@
 package jan.comic.Gui;
 
+import jan.comic.ComicApplication;
 import jan.comic.Data.DataItem;
-import jan.comic.SQLServices.TemporaryTable;
-import jan.comic.Service.NewScene;
-import jan.comic.Service.SearchEngine;
-import jan.comic.Service.WarningHelper;
-import jan.comic.Service.XMLParser;
+import jan.comic.Helper.PreparedStatementHelper;
+import jan.comic.Helper.ValueNullCheckHelper;
+import jan.comic.Search.Search;
+import jan.comic.Scene.NewScene;
+import jan.comic.Helper.WarningHelper;
+import jan.comic.XMLService.XMLParser;
 import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
-import jan.comic.Data.DataXmlExtract;
+import jan.comic.XMLService.DataXmlExtract;
 import jan.comic.SQLServices.SQLWriteQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class ComicController {
     @FXML
@@ -65,23 +71,35 @@ public class ComicController {
         this.tblComic = tblComic;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(ComicController.class);
+    private String query;
     String table = "Comic_Table";
-    String searchTable = "TempTable";
     String searchColumn = "Comic";
+    private final List<String> comicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
-    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
-    TemporaryTable temporaryTable = new TemporaryTable(sqlWriteQuery);
-    SearchEngine searchEngine = new SearchEngine();
-    DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser, temporaryTable,searchEngine,sqlWriteQuery);
+    PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
+    ValueNullCheckHelper valueNullCheckHelper = new ValueNullCheckHelper();
+    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table, comicColumns,searchColumn);
+    DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser,preparedStatementHelper);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
+    Search search = new Search(xmlParser,tableIInitiator,table);
 
 
     @FXML
     public void initialize() {
         tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.isEmpty()) {
+                logger.info(oldValue);
+                query = sqlWriteQuery.searchQuery(newValue);
+                search.performSearch(query,tblComic);
+                logger.info(newValue);
+            }
+        });
     }
 
     @FXML
@@ -93,14 +111,19 @@ public class ComicController {
         val[3] = txtBox.getText();
         val[4] = txtPublisher.getText();
 
-        tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        valueNullCheckHelper.comicValueChecker(val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
+
+        query = sqlWriteQuery.readQuery(table);
+        Document doc = dataReadWrite.dataRead(query);
+        tableIInitiator.initialize(tblComic,table, doc);
     }
 
     @FXML
     public void comicDelete(ActionEvent   actionEvent) {
         String id = txtDeleteID.getText();
         if (ckBxSureDelete.isSelected()){
-            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
+            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
             tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
             ckBxSureDelete.setSelected(false);
         }else{
@@ -112,28 +135,10 @@ public class ComicController {
     @FXML
     public void comicSearch(ActionEvent actionEvent) {
 
-        final String[] currentTable = {table};
-
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if(!newValue.isEmpty()){
-                Document searchValueDoc;
-                Document searchValue;
-
-
-                if(currentTable[0].equals(searchTable)){
-                    searchValue = dataReadWrite.dataReadSearch(sqlWriteQuery.searchQuery(newValue, searchColumn, searchTable),newValue,searchColumn);
-
-                    currentTable[0] = searchTable;
-                    tableIInitiator.initialize(tblComic,table,searchValue);
-
-                }else {
-                    searchValue =  dataReadWrite.dataRead(sqlWriteQuery.searchQuery(newValue, searchColumn, table));
-                    tableIInitiator.initialize(tblComic,searchTable,searchValue);
-                }
-                tableIInitiator.initialize(tblComic,table,searchValue);
-            }
-        });
+//        logger.info(oldValue);
+//        query = sqlWriteQuery.searchQuery(newValue);
+//        search.performSearch(query,tblComic);
+//        logger.info(newValue);
     }
 
     @FXML

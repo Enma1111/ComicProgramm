@@ -1,4 +1,4 @@
-package jan.comic.Service;
+package jan.comic.Search;
 
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 //Klasse nicht fertig so wie Ihre zugehörigen Funktionen in den Controllern und anderen Klassen
-
+@Deprecated
 public class SearchEngine {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchEngine.class);

@@ -2,7 +2,7 @@ package jan.comic.TableService;
 
 
 import jan.comic.Data.DataItem;
-import jan.comic.Data.DataXmlExtract;
+import jan.comic.XMLService.DataXmlExtract;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

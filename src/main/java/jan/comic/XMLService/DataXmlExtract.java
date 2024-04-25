@@ -1,5 +1,6 @@
-package jan.comic.Data;
+package jan.comic.XMLService;
 
+import jan.comic.Data.DataItem;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package jan.comic.Service;
+package jan.comic.Helper;
 
 import javafx.scene.control.Alert;
 

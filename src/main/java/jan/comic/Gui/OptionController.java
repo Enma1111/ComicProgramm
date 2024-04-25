@@ -1,6 +1,6 @@
 package jan.comic.Gui;
 
-import jan.comic.Service.NewScene;
+import jan.comic.Scene.NewScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

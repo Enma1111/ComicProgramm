@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
-
+@Deprecated
 public class TemporaryTable {
 
     private final SQLWriteQuery sqlWriteQuery;
@@ -29,7 +29,7 @@ public class TemporaryTable {
             PreparedStatement preparedStatementForTempTable = connection.prepareStatement(query);
             preparedStatementForTempTable.executeUpdate();
 
-            insertIntoTempTable(connection, searchList, sqlWriteQuery.populateTempTableQuery(Temp_Table));
+//            insertIntoTempTable(connection, searchList, sqlWriteQuery.populateTempTableQuery(Temp_Table));
         }
     }
 

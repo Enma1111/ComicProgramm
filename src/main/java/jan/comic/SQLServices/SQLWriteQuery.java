@@ -1,5 +1,8 @@
 package jan.comic.SQLServices;
 
+import jan.comic.Helper.PreparedStatementHelper;
+import jan.comic.Helper.StringBuilderHelper;
+import jan.comic.Helper.ValueNullCheckHelper;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,105 +13,86 @@ import java.util.List;
 
 public class SQLWriteQuery {
 
-    String tableName;
-    String tempTable = "TempTable";
-    private static final Logger logger = LoggerFactory.getLogger(SQLWriteQuery.class);
-
+    private final String tableName;
+    private List<String> colNames;
     private String query;
-    private final List<String> comicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
-    private final List<String> movieColumns = Arrays.asList("Film","Hauptdarsteller,Ort,Vertrieb,Format");
-    private final List<String> bookColumns = Arrays.asList("Buch","Ort","Verlag");
+    private static final Logger logger = LoggerFactory.getLogger(SQLWriteQuery.class);
+    private final StringBuilderHelper stringBuilderHelper;
 
-    public SQLWriteQuery(String tableName) {
+    public SQLWriteQuery(String tableName, List<String> colNames, String searchColumn) {
         this.tableName = tableName;
+        stringBuilderHelper  = new StringBuilderHelper(colNames,searchColumn);
     }
 
     public String getTableName() {
         return tableName;
     }
 
+    public List<String> getColNames() {
+        return colNames;
+    }
+
+    public void setColNames(List<String> colNames) {
+        this.colNames = colNames;
+    }
+
     public String readQuery(String tableName){
         query = "SELECT * FROM " + tableName + ";";
+        logger.info(query);
         return query;
     }
 
-    public String searchQuery(@NotNull String searchTerm, String colName, @NotNull String searchTable){
-        String searchTermUpper = searchTerm.substring(0,1).toUpperCase();
-        if (searchTable.equals(tempTable)){
-            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "%';";
-            logger.info(query);
-        } else if (searchTermUpper.length() == 1){
-            searchTermUpper = searchTermUpper + "%";
-            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTermUpper + "';";
-            logger.info(query);
-        }
+    public String searchQuery(@NotNull String searchTerm){
 
+        query = stringBuilderHelper.searchQueryBuilder(tableName,searchTerm);
+        logger.info(query);
         return query;
     }
 
-    public String saveQuery(String[] val){
+    public String saveQuery(){
 
-         switch (tableName){
-            case "Comic_Table" ->{
-
-                String comicName = val[0] != null ? "'" + val[0] + "'" : "NULL";
-                String number = val[1].isEmpty() ? "'" + val[1] + "'" : "Einzelband";
-                String packaging = val[2].isEmpty() ? "'" + val[2] + "'" : "Offen";
-                String box = val[3] != null ? "'" + val[3] + "'" : "NULL";
-                String publisher = val[4] != null ? "'" + val[4] + "'" : "NULL";
-
-                query = "INSERT INTO " + tableName + " (Comic,Nummer,Verpackung,Kiste,Verlag) VALUES " +
-                        "(" + comicName + "," + number + "," + packaging + "," + box + "," + publisher + ")";
-            }
-            case "Movie_Table" ->{
-
-                String movieName = val[0] != null ? "'" + val[0] + "'" : "NULL";
-                String mainActor = val[1] != null ? "'" + val[1] + "'" : "NULL";
-                String box = val[2] != null ? "'" + val[2] + "'" : "NULL";
-                String distributor = val[3] != null ? "'" + val[3] + "'" : "NULL";
-                String format = val[4] != null ? "'" + val[4] + "'" : "NULL";
-
-                query = "INSERT INTO " + tableName + " (Film,Hauptdarsteller,Ort,Vertrieb,Format) VALUES " +
-                        "(" + movieName + "," + mainActor + "," + box + "," + distributor + "," + format + ")";
-            }
-            case "Book_Table" ->{
-
-                String bookName = val[0] != null ? "'" + val[0] + "'" : "NULL";
-                String box = val[1] != null ? "'" + val[1] + "'" : "NULL";
-                String publisher = val[2] != null ? "'" + val[2] + "'" : "NULL";
-
-                query = "INSERT INTO " + tableName + " (Buch,Ort,Verlag) VALUES " +
-                        "(" + bookName + "," + box + "," + publisher + ")";
-            }
-            default -> {
-                logger.warn("Unknown table name: {}", tableName);
-                return "";
-            }
-        }
+        query = stringBuilderHelper.insertQueryBuilder(tableName);
+        logger.info(query);
         return query;
     }
 
-    public String deleteQuery(String id){
-        return "DELETE FROM " + tableName + " WHERE ID = " + id + ";";
-    }
+    public String deleteQuery(){
 
-    public String populateTempTableQuery(String tempTable) {
-        StringBuilder insertQuery = new StringBuilder("INSERT INTO " + tempTable + " (");
-        StringBuilder values = new StringBuilder("VALUES (");
-
-        for (int i = 0; i < comicColumns.size(); i++) {
-            insertQuery.append(comicColumns.get(i));
-            values.append("?");
-            if (i < comicColumns.size() - 1) {
-                insertQuery.append(", ");
-                values.append(", ");
-            }
-        }
-
-        insertQuery.append(") ");
-        values.append(")");
-
-        return insertQuery.toString() + values.toString();
+        query = "DELETE FROM " + tableName + " WHERE ID = ?;";
+        logger.info(query);
+        return query;
     }
 
 }
+//                query = insertQuery + "Film,Hauptdarsteller,Ort,Vertrieb,Format) VALUES " +
+//                        "(" + movieName + "," + mainActor + "," + box + "," + distributor + "," + format + ")";
+//                query = insertQuery + "Comic,Nummer,Verpackung,Kiste,Verlag) VALUES " +
+//                        "(" + comicName + "," + number + "," + packaging + "," + box + "," + publisher + ")";
+//
+//        String searchTermUpper = searchTerm.substring(0,1).toUpperCase();
+//        if (searchTable.equals(tempTable)){
+//            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTerm + "%';";
+//            logger.info(query);
+//        } else if (searchTermUpper.length() == 1){
+//            searchTermUpper = searchTermUpper + "%";
+//            query = "SELECT * FROM " + tableName + " WHERE " + colName + " LIKE '" + searchTermUpper + "';";
+//            logger.info(query);
+//        }
+//    public String populateTempTableQuery(String tempTable) {
+//        StringBuilder insertQuery = new StringBuilder();
+//        StringBuilder values = new StringBuilder("VALUES (");
+//
+//        for (int i = 0; i < comicColumns.size(); i++) {
+//            insertQuery.append(comicColumns.get(i));
+//            values.append("?");
+//            if (i < comicColumns.size() - 1) {
+//                insertQuery.append(", ");
+//                values.append(", ");
+//            }
+//        }
+//
+//        insertQuery.append(") ");
+//        values.append(")");
+//
+//        return insertQuery.toString() + values.toString();
+//    }

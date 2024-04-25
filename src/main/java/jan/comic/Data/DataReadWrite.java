@@ -1,9 +1,7 @@
 package jan.comic.Data;
 
-import jan.comic.SQLServices.SQLWriteQuery;
-import jan.comic.SQLServices.TemporaryTable;
-import jan.comic.Service.SearchEngine;
-import jan.comic.Service.XMLParser;
+import jan.comic.Helper.PreparedStatementHelper;
+import jan.comic.XMLService.XMLParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -18,24 +16,20 @@ public class DataReadWrite {
 
     String tableName;
     private final XMLParser xmlParser;
-    private final TemporaryTable temporaryTable;
-    private final SearchEngine searchEngine;
-    private final SQLWriteQuery sqlWriteQuery;
-//    static final String url = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-    static final String url = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+    private final PreparedStatementHelper preparedStatementHelper;
+    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+//    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
     private static final Logger logger = LoggerFactory.getLogger(DataReadWrite.class);
 
-    public DataReadWrite(String tableName, XMLParser xmlParser, TemporaryTable temporaryTable, SearchEngine searchEngine, SQLWriteQuery sqlWriteQuery) {
+    public DataReadWrite(String tableName, XMLParser xmlParser, PreparedStatementHelper preparedStatementHelper) {
         this.tableName = tableName;
         this.xmlParser = xmlParser;
-        this.temporaryTable = temporaryTable;
-        this.searchEngine = searchEngine;
-        this.sqlWriteQuery = sqlWriteQuery;
+        this.preparedStatementHelper = preparedStatementHelper;
     }
 
     public Document dataRead(String query){
 
-        try(Connection connection = DriverManager.getConnection(url)) {
+        try(Connection connection = DriverManager.getConnection(URL)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -46,46 +40,35 @@ public class DataReadWrite {
         }
     }
 
-    public void dataWrite(String query) {
+    public void dataWrite(String query, String[] values)  {
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(URL)) {
             logger.info(query);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                logger.info("A new row has been inserted.");
-            }
 
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatementHelper.insertPreparedStatement(preparedStatement, values);
+
+            logger.info("A new row has been inserted.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void dataDelete(String query) {
-        try (Connection connection = DriverManager.getConnection(url)) {
+    public void dataDelete(String query, String id) {
+        try (Connection connection = DriverManager.getConnection(URL)) {
 
             logger.info(query);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.executeUpdate();
+            preparedStatementHelper.deletePreparedStatement(preparedStatement,id);
             logger.info("Line has been Deleted");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public Document dataReadSearch(String query, String searchTerm, String searchColumn){
-
-        try(Connection connection = DriverManager.getConnection(url)) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            temporaryTable.createTemporaryTable(dataRead(sqlWriteQuery.searchQuery(searchTerm,searchColumn,tableName));
-
-
-            return xmlParser.createXml(resultSet);
-
-        } catch (SQLException | TransformerException | ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
+
+//int rowsInserted = preparedStatement.executeUpdate();
+//            if (rowsInserted > 0) {
+//
+//            }

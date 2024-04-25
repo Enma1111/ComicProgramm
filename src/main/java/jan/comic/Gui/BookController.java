@@ -1,21 +1,27 @@
 package jan.comic.Gui;
 
 import jan.comic.Data.DataItem;
-import jan.comic.SQLServices.TemporaryTable;
-import jan.comic.Service.NewScene;
-import jan.comic.Service.SearchEngine;
-import jan.comic.Service.WarningHelper;
-import jan.comic.Service.XMLParser;
+import jan.comic.Helper.PreparedStatementHelper;
+import jan.comic.Helper.ValueNullCheckHelper;
+import jan.comic.Scene.NewScene;
+import jan.comic.Helper.WarningHelper;
+import jan.comic.Search.Search;
+import jan.comic.XMLService.XMLParser;
 import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
-import jan.comic.Data.DataXmlExtract;
+import jan.comic.XMLService.DataXmlExtract;
 import jan.comic.SQLServices.SQLWriteQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class BookController {
     @FXML
@@ -51,20 +57,34 @@ public class BookController {
     @FXML
     private Button btnBackToTable;
 
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+    private String query;
     String table = "Book_Table";
+    String searchColumn = "Buch";
+    private final List<String> bookColumns = Arrays.asList("Buch","Ort","Verlag");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
-    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table);
-    TemporaryTable temporaryTable = new TemporaryTable(sqlWriteQuery);
-    SearchEngine searchEngine = new SearchEngine();
-    DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser,temporaryTable,searchEngine,sqlWriteQuery);
+    PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
+    ValueNullCheckHelper valueNullCheckHelper = new ValueNullCheckHelper();
+    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table,bookColumns,searchColumn);
+    DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser,preparedStatementHelper);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
+    Search search = new Search(xmlParser,tableIInitiator,table);
 
     @FXML
     public void initialize() {
         tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue.isEmpty()) {
+                logger.info(oldValue);
+                query = sqlWriteQuery.searchQuery(newValue);
+                search.performSearch(query,tblBook);
+                logger.info(newValue);
+            }
+        });
     }
 
     @FXML
@@ -74,15 +94,19 @@ public class BookController {
         val[1] = txtBox.getText();
         val[2] = txtPublisher.getText();
 
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(val));
-        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        valueNullCheckHelper.comicValueChecker(val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
+
+        query = sqlWriteQuery.readQuery(table);
+        Document doc = dataReadWrite.dataRead(query);
+        tableIInitiator.initialize(tblBook,table, doc);
     }
 
     @FXML
     public void bookDelete(ActionEvent actionEvent) {
         String id = txtDeleteID.getText();
         if (ckBxSureDelete.isSelected()){
-            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(id));
+            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
             tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
             ckBxSureDelete.setSelected(false);
         }else{
