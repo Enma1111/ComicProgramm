@@ -71,7 +71,8 @@ public class MovieController {
     private String query;
     String table = "Movie_Table";
     String searchColumn = "Film";
-    private final List<String> movieColumns = Arrays.asList("Film","Hauptdarsteller,Ort,Vertrieb,Format");
+    private final List<String> movieColumns = Arrays.asList("ID","Film","Hauptdarsteller","Ort","Vertrieb","Format","Doppelt");
+    private final List<String> insertMovieColumns = Arrays.asList("Film","Hauptdarsteller","Ort","Vertrieb","Format");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
     PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
@@ -99,19 +100,6 @@ public class MovieController {
 
     @FXML
     public void movieSearch(ActionEvent actionEvent) {
-        String[] val = new String[5];
-        val[0] = txtMovieName.getText();
-        val[1] = txtMainActor.getText();
-        val[2] = txtBox.getText();
-        val[3] = txtDistributor.getText();
-        val[4] = txtFormat.getText();
-
-        valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
-
-        query = sqlWriteQuery.readQuery(table);
-        Document doc = dataReadWrite.dataRead(query);
-        tableIInitiator.initialize(tblMovie,table, doc);
     }
 
     @FXML
@@ -136,7 +124,7 @@ public class MovieController {
         val[4] = txtFormat.getText();
 
         valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertMovieColumns), val);
 
         query = sqlWriteQuery.readQuery(table);
         Document doc = dataReadWrite.dataRead(query);

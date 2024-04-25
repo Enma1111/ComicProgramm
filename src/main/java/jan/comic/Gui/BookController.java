@@ -61,7 +61,8 @@ public class BookController {
     private String query;
     String table = "Book_Table";
     String searchColumn = "Buch";
-    private final List<String> bookColumns = Arrays.asList("Buch","Ort","Verlag");
+    private final List<String> bookColumns = Arrays.asList("ID","Buch","Ort","Verlag","Doppelt");
+    private final List<String> insertbookColumns = Arrays.asList("Buch","Ort","Verlag");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
     PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
@@ -95,7 +96,7 @@ public class BookController {
         val[2] = txtPublisher.getText();
 
         valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertbookColumns), val);
 
         query = sqlWriteQuery.readQuery(table);
         Document doc = dataReadWrite.dataRead(query);

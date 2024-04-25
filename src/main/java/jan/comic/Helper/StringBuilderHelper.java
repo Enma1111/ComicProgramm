@@ -1,7 +1,7 @@
 package jan.comic.Helper;
 
 
-import jan.comic.ComicApplication;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,15 +19,15 @@ public class StringBuilderHelper {
         this.searchColumn = searchColumn;
     }
 
-    public String insertQueryBuilder(String table){
+    public String insertQueryBuilder(String table, @NotNull List<String> insertColumnNames){
 
         StringBuilder insertQuery = new StringBuilder("INSERT INTO " + table + "(");
         StringBuilder values = new StringBuilder("VALUES (");
 
-        for (int i = 0; i < colNames.size(); i++) {
-            insertQuery.append(colNames.get(i));
+        for (int i = 0; i < insertColumnNames.size(); i++) {
+            insertQuery.append(insertColumnNames.get(i));
             values.append("?");
-            if (i < colNames.size() - 1) {
+            if (i < insertColumnNames.size() - 1) {
                 insertQuery.append(", ");
                 values.append(", ");
             }

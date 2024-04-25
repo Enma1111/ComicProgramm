@@ -43,12 +43,12 @@
             <children>
                 <TableView fx:id="tblMovie" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
                     <columns>
-                        <TableColumn fx:id="ColID" prefWidth="75.0" text="ID">
+                        <TableColumn fx:id="colID" prefWidth="75.0" text="ID">
                             <cellValueFactory>
                                 <PropertyValueFactory property="id" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="ColMovie" prefWidth="139.20001220703125" text="Film">
+                        <TableColumn fx:id="colMovie" prefWidth="139.20001220703125" text="Film">
                             <cellValueFactory>
                                 <PropertyValueFactory property="movieName" />
                             </cellValueFactory>
@@ -58,13 +58,13 @@
                                 <PropertyValueFactory property="mainActor" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="ColPlace" prefWidth="77.5999755859375" text="Ort">
+                        <TableColumn fx:id="colPlace" prefWidth="77.5999755859375" text="Ort">
                             <cellValueFactory>
                                 <PropertyValueFactory property="box" />
                             </cellValueFactory>
                         </TableColumn>
 
-                        <TableColumn fx:id="ColDistributor" prefWidth="100.79998779296875" text="Vertrieb">
+                        <TableColumn fx:id="colDistributor" prefWidth="100.79998779296875" text="Vertrieb">
                             <cellValueFactory>
                                 <PropertyValueFactory property="distributer" />
                             </cellValueFactory>
@@ -74,7 +74,7 @@
                                 <PropertyValueFactory property="format" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="ColDoubleMovieIn" prefWidth="80.800048828125" text="Doppbelt In">
+                        <TableColumn fx:id="colDoubleMovieIn" prefWidth="80.800048828125" text="Doppbelt In">
                             <cellValueFactory>
                                 <PropertyValueFactory property="doubleItem" />
                             </cellValueFactory>

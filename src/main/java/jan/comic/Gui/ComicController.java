@@ -1,6 +1,5 @@
 package jan.comic.Gui;
 
-import jan.comic.ComicApplication;
 import jan.comic.Data.DataItem;
 import jan.comic.Helper.PreparedStatementHelper;
 import jan.comic.Helper.ValueNullCheckHelper;
@@ -75,7 +74,8 @@ public class ComicController {
     private String query;
     String table = "Comic_Table";
     String searchColumn = "Comic";
-    private final List<String> comicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
+    private final List<String> comicColumns = Arrays.asList("ID","Comic", "Nummer", "Verpackung", "Kiste", "Verlag","Doppelt");
+    private final List<String> insertComicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
     PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
@@ -112,7 +112,7 @@ public class ComicController {
         val[4] = txtPublisher.getText();
 
         valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(), val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertComicColumns), val);
 
         query = sqlWriteQuery.readQuery(table);
         Document doc = dataReadWrite.dataRead(query);

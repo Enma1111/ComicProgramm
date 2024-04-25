@@ -17,8 +17,8 @@ public class DataReadWrite {
     String tableName;
     private final XMLParser xmlParser;
     private final PreparedStatementHelper preparedStatementHelper;
-    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-//    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+//    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
     private static final Logger logger = LoggerFactory.getLogger(DataReadWrite.class);
 
     public DataReadWrite(String tableName, XMLParser xmlParser, PreparedStatementHelper preparedStatementHelper) {

@@ -49,9 +49,9 @@ public class SQLWriteQuery {
         return query;
     }
 
-    public String saveQuery(){
+    public String saveQuery(List<String> insertColumnNames){
 
-        query = stringBuilderHelper.insertQueryBuilder(tableName);
+        query = stringBuilderHelper.insertQueryBuilder(tableName,insertColumnNames);
         logger.info(query);
         return query;
     }
