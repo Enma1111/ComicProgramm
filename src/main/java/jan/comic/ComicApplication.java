@@ -18,12 +18,11 @@ public class ComicApplication extends Application {
     @Override
     public void start(@NotNull Stage stage) throws IOException {
         logger.info("Starting Comic Application");
-//        ImageIcon icon = new ImageIcon(".//Icons//gear-icon-13.jpg");
-//        Image icon = new Image(getClass().getClassLoader().getResourceAsStream("gear-icon.png"));
         FXMLLoader fxmlLoader = new FXMLLoader(ComicApplication.class.getResource("option-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 200, 200);
-//        stage.getIcons().add(icon);
         stage.setTitle("Optionen");
+        Image icon = new Image(getClass().getResourceAsStream("gear-icon.png"));
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }
