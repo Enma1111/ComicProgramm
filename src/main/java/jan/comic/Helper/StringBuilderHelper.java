@@ -43,7 +43,7 @@ public class StringBuilderHelper {
 
         StringBuilder select = new StringBuilder("SELECT ");
         StringBuilder virtualTable = new StringBuilder(table + "_fts");
-        StringBuilder bm25weigthing = new StringBuilder(", 0, 10, 0, 0, 0, 0, 0) AS bm25_score,");
+        StringBuilder bm25weigthing = new StringBuilder(", 2.0, 0.75, 0, 0, 0, 0, 0) AS bm25_score,");
         StringBuilder from = new StringBuilder(" FROM ");
         StringBuilder searchTable = new StringBuilder(table + " t ");
         StringBuilder innerJoin = new StringBuilder("INNER JOIN ");

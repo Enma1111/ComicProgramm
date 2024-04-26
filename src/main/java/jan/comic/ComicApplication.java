@@ -3,11 +3,14 @@ package jan.comic;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class ComicApplication extends Application {
@@ -15,8 +18,11 @@ public class ComicApplication extends Application {
     @Override
     public void start(@NotNull Stage stage) throws IOException {
         logger.info("Starting Comic Application");
+//        ImageIcon icon = new ImageIcon(".//Icons//gear-icon-13.jpg");
+//        Image icon = new Image(getClass().getClassLoader().getResourceAsStream("gear-icon.png"));
         FXMLLoader fxmlLoader = new FXMLLoader(ComicApplication.class.getResource("option-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 200, 200);
+//        stage.getIcons().add(icon);
         stage.setTitle("Optionen");
         stage.setScene(scene);
         stage.show();

@@ -134,7 +134,7 @@ public class ComicController {
 
     @FXML
     public void comicSearch(ActionEvent actionEvent) {
-
+//        if (btnSearch)
 //        logger.info(oldValue);
 //        query = sqlWriteQuery.searchQuery(newValue);
 //        search.performSearch(query,tblComic);

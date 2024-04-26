@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+@Deprecated
 public class DataExporter {
 
     public static void exportXmlDataToText(@NotNull Document document, String outputFilePath) {
