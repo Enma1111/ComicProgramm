@@ -1,4 +1,4 @@
-package jan.comic.Gui;
+package jan.comic.GuiController;
 
 import jan.comic.Scene.NewScene;
 import javafx.event.ActionEvent;
@@ -17,12 +17,15 @@ public class OptionController {
     private Button btnBook;
 
     NewScene newScene = new NewScene();
+    String comicViewName = "Comics";
+    String bookViewName = "Bücher";
+    String movieViewName = "Filme";
 
     @FXML
     public void enterComicPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnComic.getScene().getWindow();
         try {
-            newScene.newScene("comic-view.fxml", stage, 1150, 700,"Comics");
+            newScene.newScene("comic-view.fxml", stage, 1200, 700,comicViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -32,7 +35,7 @@ public class OptionController {
     public void enterBookPnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnBook.getScene().getWindow();
         try {
-            newScene.newScene("book-view.fxml", stage, 1150, 700,"Bücher");
+            newScene.newScene("book-view.fxml", stage, 1150, 700,bookViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -42,7 +45,7 @@ public class OptionController {
     public void enterMoviePnl(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnMovie.getScene().getWindow();
         try {
-            newScene.newScene("movie-view.fxml", stage, 1150, 700,"Filme");
+            newScene.newScene("movie-view.fxml", stage, 1150, 700,movieViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }

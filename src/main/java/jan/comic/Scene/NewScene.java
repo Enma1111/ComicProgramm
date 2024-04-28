@@ -3,6 +3,7 @@ package jan.comic.Scene;
 import jan.comic.ComicApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 

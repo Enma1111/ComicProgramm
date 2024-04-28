@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class ComicApplication extends Application {
@@ -21,7 +20,7 @@ public class ComicApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ComicApplication.class.getResource("option-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 200, 200);
         stage.setTitle("Optionen");
-        Image icon = new Image(getClass().getResourceAsStream("gear-icon.png"));
+        Image icon = new Image("book-icon.png");
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();

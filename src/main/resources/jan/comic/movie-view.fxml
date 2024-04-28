@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,38 +13,73 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.MovieController">
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.GuiController.MovieController">
     <items>
         <AnchorPane>
             <children>
-                <Button fx:id="BtnMovieSave" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#saveMovie" text="Speichern" />
+                <Button fx:id="btnMovieSave" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#saveMovie" text="Speichern">
+               <graphic>
+                  <FontIcon iconLiteral="fas-save" />
+               </graphic></Button>
                 <Label layoutX="19.0" layoutY="31.0" text="Film Titel" />
-                <TextField fx:id="TxtMovieName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="txtMovieName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
                 <Separator layoutX="20.0" layoutY="369.0" prefHeight="3.0" prefWidth="218.0" />
                 <Label layoutX="20.0" layoutY="92.0" text="Hauptdarsteller" />
-                <TextField fx:id="TxtMainActor" layoutX="20.0" layoutY="116.0" prefHeight="26.0" prefWidth="218.0" />
-                <TextField fx:id="TxtBox" layoutX="20.0" layoutY="174.0" prefHeight="26.0" prefWidth="218.0" />
-                <TextField fx:id="TxtDistributor" layoutX="19.0" layoutY="234.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="txtMainActor" layoutX="20.0" layoutY="116.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="txtBox" layoutX="20.0" layoutY="174.0" prefHeight="26.0" prefWidth="218.0" />
+                <TextField fx:id="txtDistributor" layoutX="19.0" layoutY="234.0" prefHeight="26.0" prefWidth="218.0" />
                 <Label layoutX="24.0" layoutY="149.0" text="Kiste" />
                 <Label layoutX="21.0" layoutY="209.0" text="Vertrieb" />
                 <Label layoutX="19.0" layoutY="383.0" text="Film Titel Suche" />
-                <TextField fx:id="TxtSearch" layoutX="16.0" layoutY="409.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="BtnSearch" layoutX="18.0" layoutY="442.0" mnemonicParsing="false" onAction="#movieSearch" text="Suche" />
+                <TextField fx:id="txtSearch" layoutX="16.0" layoutY="409.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="btnSearch" layoutX="18.0" layoutY="442.0" mnemonicParsing="false" onAction="#movieSearch" text="Suche">
+               <graphic>
+                  <FontIcon iconLiteral="fas-search" />
+               </graphic></Button>
                 <Separator layoutX="19.0" layoutY="482.0" prefHeight="3.0" prefWidth="218.0" />
                 <Label layoutX="22.0" layoutY="495.0" text="Löschen nach ID" />
-                <CheckBox fx:id="CkBxSureDelete" layoutX="20.0" layoutY="560.0" mnemonicParsing="false" text="Sicher" />
-                <TextField fx:id="TxtDeleteID" layoutX="19.0" layoutY="526.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="BtnDelete" layoutX="20.0" layoutY="592.0" mnemonicParsing="false" onAction="#movieDelete" text="Löschen" />
+                <CheckBox fx:id="ckBxSureDelete" layoutX="20.0" layoutY="560.0" mnemonicParsing="false" text="Sicher" />
+                <TextField fx:id="txtDeleteID" layoutX="19.0" layoutY="526.0" prefHeight="26.0" prefWidth="218.0" />
+                <Button fx:id="btnDelete" layoutX="20.0" layoutY="592.0" mnemonicParsing="false" onAction="#movieDelete" text="Löschen">
+               <graphic>
+                  <FontIcon iconLiteral="fas-trash-alt" />
+               </graphic></Button>
             <Separator layoutX="16.0" layoutY="628.0" prefHeight="3.0" prefWidth="218.0" />
-            <Button fx:id="BtnBackToOptions" layoutX="63.0" layoutY="647.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl" />
-            <TextField fx:id="TxtFormat" layoutX="18.0" layoutY="293.0" prefHeight="26.0" prefWidth="225.0" />
+            <Button fx:id="btnBackToOptions" layoutX="69.0" layoutY="648.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl">
+               <graphic>
+                  <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
+               </graphic></Button>
+            <TextField fx:id="txtFormat" layoutX="18.0" layoutY="293.0" prefHeight="26.0" prefWidth="218.0" />
             <Label layoutX="23.0" layoutY="268.0" text="Format" />
-            <Button fx:id="BtnBackToTable" layoutX="182.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück" />
+            <Button fx:id="btnBackToTable" layoutX="167.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück">
+               <graphic>
+                  <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
+               </graphic></Button>
+            <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="302.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
             </children></AnchorPane>
-        <AnchorPane prefHeight="708.0">
+        <AnchorPane prefHeight="708.0" prefWidth="900.0">
             <children>
-                <TableView fx:id="tblMovie" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
+                <TableView fx:id="tblMovie" layoutX="9.0" layoutY="6.0" prefHeight="686.0" prefWidth="855.0">
                     <columns>
                         <TableColumn fx:id="colID" prefWidth="75.0" text="ID">
                             <cellValueFactory>

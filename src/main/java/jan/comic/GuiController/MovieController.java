@@ -1,4 +1,4 @@
-package jan.comic.Gui;
+package jan.comic.GuiController;
 
 import jan.comic.Data.DataItem;
 import jan.comic.Helper.PreparedStatementHelper;
@@ -23,7 +23,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class BookController {
+public class MovieController {
+    @FXML
+    private TableColumn<DataItem, String> colPlace;
+    @FXML
+    private TableColumn<DataItem, String> colDoubleMovieIn;
     @FXML
     private Button btnDelete;
     @FXML
@@ -31,43 +35,51 @@ public class BookController {
     @FXML
     private TextField txtDeleteID;
     @FXML
+    private TableColumn<DataItem, String>  colDistributor;
+    @FXML
+    private TableColumn<DataItem, String>  colMovie;
+    @FXML
     private TextField txtSearch;
+    @FXML
+    private TextField txtDistributor;
     @FXML
     private CheckBox ckBxSureDelete;
     @FXML
-    private Button btnBookSave;
-    @FXML
-    private TextField txtPublisher;
+    private TextField txtBox;
     @FXML
     private Button btnSearch;
     @FXML
-    private TextField txtBox;
+    private TableColumn<DataItem, Integer>  colID;
     @FXML
-    private TextField txtBookName;
+    private TableColumn<DataItem, String> colMainActor;
     @FXML
-    private TableColumn<DataItem, String> colPlace;
+    private TableView<DataItem> tblMovie;
     @FXML
-    private TableColumn<DataItem, String> colBook;
+    private TableColumn<DataItem, String> colFormat;
     @FXML
-    private TableColumn<DataItem, String> colPublisher;
+    private Button btnMovieSave;
     @FXML
-    private TableColumn<DataItem, Integer> colID;
+    private TextField txtMovieName;
     @FXML
-    private TableView<DataItem> tblBook;
+    private TextField txtMainActor;
+    @FXML
+    private TextField txtFormat;
     @FXML
     private Button btnBackToTable;
 
-    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
     private String query;
-    String table = "Book_Table";
-    String searchColumn = "Buch";
-    private final List<String> bookColumns = Arrays.asList("ID","Buch","Ort","Verlag","Doppelt");
-    private final List<String> insertbookColumns = Arrays.asList("Buch","Ort","Verlag");
+    String table = "Movie_Table";
+    String searchColumn = "Film";
+    String optionViewName = "Optionen";
+    String optionFXML = "option-view.fxml";
+    private final List<String> movieColumns = Arrays.asList("ID","Film","Hauptdarsteller","Ort","Vertrieb","Format","Doppelt");
+    private final List<String> insertMovieColumns = Arrays.asList("Film","Hauptdarsteller","Ort","Vertrieb","Format");
     NewScene newScene = new NewScene();
     XMLParser xmlParser = new XMLParser(table);
     PreparedStatementHelper preparedStatementHelper = new PreparedStatementHelper();
     ValueNullCheckHelper valueNullCheckHelper = new ValueNullCheckHelper();
-    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table,bookColumns,searchColumn);
+    SQLWriteQuery sqlWriteQuery = new SQLWriteQuery(table,movieColumns,searchColumn);
     DataReadWrite dataReadWrite = new DataReadWrite(table, xmlParser,preparedStatementHelper);
     DataXmlExtract dataXmlExtract = new DataXmlExtract();
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
@@ -76,39 +88,28 @@ public class BookController {
 
     @FXML
     public void initialize() {
-        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.isEmpty()) {
                 logger.info(oldValue);
                 query = sqlWriteQuery.searchQuery(newValue);
-                search.performSearch(query,tblBook);
+                search.performSearch(query,tblMovie);
                 logger.info(newValue);
             }
         });
     }
 
     @FXML
-    public void saveBook(ActionEvent actionEvent) {
-        String[] val = new String[3];
-        val[0] = txtBookName.getText();
-        val[1] = txtBox.getText();
-        val[2] = txtPublisher.getText();
-
-        valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertbookColumns), val);
-
-        query = sqlWriteQuery.readQuery(table);
-        Document doc = dataReadWrite.dataRead(query);
-        tableIInitiator.initialize(tblBook,table, doc);
+    public void movieSearch(ActionEvent actionEvent) {
     }
 
     @FXML
-    public void bookDelete(ActionEvent actionEvent) {
+    public void movieDelete(ActionEvent actionEvent) {
         String id = txtDeleteID.getText();
         if (ckBxSureDelete.isSelected()){
             dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
-            tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
             ckBxSureDelete.setSelected(false);
         }else{
             warningHelper.deleteWarning();
@@ -116,14 +117,27 @@ public class BookController {
     }
 
     @FXML
-    public void bookSearch(ActionEvent actionEvent) {
+    public void saveMovie(ActionEvent actionEvent) {
+        String[] val =new String[5];
+        val[0] = txtMovieName.getText();
+        val[1] = txtMainActor.getText();
+        val[2] = txtBox.getText();
+        val[3] = txtDistributor.getText();
+        val[4] = txtFormat.getText();
+
+        valueNullCheckHelper.comicValueChecker(val);
+        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertMovieColumns), val);
+
+        query = sqlWriteQuery.readQuery(table);
+        Document doc = dataReadWrite.dataRead(query);
+        tableIInitiator.initialize(tblMovie,table, doc);
     }
 
     @FXML
     public void backToOptions(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
         try {
-            newScene.newScene("option-view.fxml", stage, 200, 200, "Optionen");
+            newScene.newScene(optionFXML, stage, 200, 200,optionViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -131,6 +145,6 @@ public class BookController {
 
     @FXML
     public void backToMainTable(ActionEvent actionEvent) {
-        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 }

@@ -1,4 +1,4 @@
-package jan.comic.Gui;
+package jan.comic.GuiController;
 
 import jan.comic.Data.DataItem;
 import jan.comic.Helper.PreparedStatementHelper;
@@ -17,11 +17,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
+@Component
 public class ComicController {
     @FXML
     private TableColumn <DataItem, String>  colNumber;
@@ -74,6 +75,8 @@ public class ComicController {
     private String query;
     String table = "Comic_Table";
     String searchColumn = "Comic";
+    String optionViewName = "Optionen";
+    String optionFXML = "option-view.fxml";
     private final List<String> comicColumns = Arrays.asList("ID","Comic", "Nummer", "Verpackung", "Kiste", "Verlag","Doppelt");
     private final List<String> insertComicColumns = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
     NewScene newScene = new NewScene();
@@ -86,6 +89,7 @@ public class ComicController {
     TableIInitiator tableIInitiator = new TableIInitiator(dataXmlExtract);
     WarningHelper warningHelper = new WarningHelper();
     Search search = new Search(xmlParser,tableIInitiator,table);
+
 
 
     @FXML
@@ -145,7 +149,7 @@ public class ComicController {
     public void backToOptions(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
         try {
-            newScene.newScene("option-view.fxml", stage, 200, 200,"Optionen");
+            newScene.newScene(optionFXML, stage, 200, 200, optionViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }
