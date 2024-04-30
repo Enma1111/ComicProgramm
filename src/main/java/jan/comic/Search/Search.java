@@ -9,13 +9,14 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.sql.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-
+@Service
 public class Search {
 
     private final XMLParser xmlParser;

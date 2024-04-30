@@ -6,11 +6,13 @@ import jan.comic.Helper.ValueNullCheckHelper;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.List;
 
 //Diese Klasse dient dazu verschiedene SQL Abfragen zu erstellen
-
+@Service
 public class SQLWriteQuery {
 
     private final String tableName;

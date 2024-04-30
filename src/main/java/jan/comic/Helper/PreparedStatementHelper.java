@@ -1,11 +1,12 @@
 package jan.comic.Helper;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
+@Component
 public class PreparedStatementHelper {
 
     public void insertPreparedStatement(PreparedStatement preparedStatement, String @NotNull [] values) throws SQLException {

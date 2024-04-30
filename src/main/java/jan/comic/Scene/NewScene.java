@@ -6,10 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
-
+@Service
 public class NewScene {
 
     public void newScene(String newWindow, @NotNull Stage stage, int xValue, int yValue, String windowName) throws IOException {

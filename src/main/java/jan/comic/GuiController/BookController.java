@@ -6,6 +6,7 @@ import jan.comic.Helper.ValueNullCheckHelper;
 import jan.comic.Scene.NewScene;
 import jan.comic.Helper.WarningHelper;
 import jan.comic.Search.Search;
+import jan.comic.TableConfigurator.BookViewConfigurator;
 import jan.comic.XMLService.XMLParser;
 import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
@@ -17,12 +18,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
+@Component
 public class BookController {
     @FXML
     private Button btnDelete;
@@ -58,6 +60,12 @@ public class BookController {
     private Button btnBackToTable;
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+    private final BookViewConfigurator bookTableConfigurator;
+
+    public BookController(BookViewConfigurator bookTableConfigurator) {
+        this.bookTableConfigurator = bookTableConfigurator;
+    }
+
     private String query;
     String table = "Book_Table";
     String searchColumn = "Buch";
@@ -76,45 +84,50 @@ public class BookController {
     WarningHelper warningHelper = new WarningHelper();
     Search search = new Search(xmlParser,tableIInitiator,table);
 
+
+
     @FXML
     public void initialize() {
-        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.isEmpty()) {
-                logger.info(oldValue);
-                query = sqlWriteQuery.searchQuery(newValue);
-                search.performSearch(query,tblBook);
-                logger.info(newValue);
-            }
-        });
+        bookTableConfigurator.bookViewInitialize(tblBook,txtSearch);
+//        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+//
+//        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//            if(!newValue.isEmpty()) {
+//                logger.info(oldValue);
+//                query = sqlWriteQuery.searchQuery(newValue);
+//                search.performSearch(query,tblBook);
+//                logger.info(newValue);
+//            }
+//        });
     }
 
     @FXML
     public void saveBook(ActionEvent actionEvent) {
-        String[] val = new String[3];
-        val[0] = txtBookName.getText();
-        val[1] = txtBox.getText();
-        val[2] = txtPublisher.getText();
-
-        valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertbookColumns), val);
-
-        query = sqlWriteQuery.readQuery(table);
-        Document doc = dataReadWrite.dataRead(query);
-        tableIInitiator.initialize(tblBook,table, doc);
+        bookTableConfigurator.bookSafe(txtBookName,txtBox,txtPublisher, tblBook);
+//        String[] val = new String[3];
+//        val[0] = txtBookName.getText();
+//        val[1] = txtBox.getText();
+//        val[2] = txtPublisher.getText();
+//
+//        valueNullCheckHelper.comicValueChecker(val);
+//        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertbookColumns), val);
+//
+//        query = sqlWriteQuery.readQuery(table);
+//        Document doc = dataReadWrite.dataRead(query);
+//        tableIInitiator.initialize(tblBook,table, doc);
     }
 
     @FXML
     public void bookDelete(ActionEvent actionEvent) {
-        String id = txtDeleteID.getText();
-        if (ckBxSureDelete.isSelected()){
-            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
-            tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-            ckBxSureDelete.setSelected(false);
-        }else{
-            warningHelper.deleteWarning();
-        }
+        bookTableConfigurator.bookDelete(txtDeleteID,ckBxSureDelete,tblBook);
+//        String id = txtDeleteID.getText();
+//        if (ckBxSureDelete.isSelected()){
+//            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
+//            tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+//            ckBxSureDelete.setSelected(false);
+//        }else{
+//            warningHelper.deleteWarning();
+//        }
     }
 
     @FXML
@@ -123,16 +136,18 @@ public class BookController {
 
     @FXML
     public void backToOptions(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
-        try {
-            newScene.newScene(optionFXML, stage, 200, 200, optionViewName);
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
+        bookTableConfigurator.backToOptions(btnBackToOptions);
+//        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
+//        try {
+//            newScene.newScene(optionFXML, stage, 200, 200, optionViewName);
+//        } catch (IOException e) {
+//            throw new IOException(e);
+//        }
     }
 
     @FXML
     public void backToMainTable(ActionEvent actionEvent) {
-        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        bookTableConfigurator.backToMainTable(tblBook);
+//        tableIInitiator.initialize(tblBook,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 }

@@ -6,6 +6,7 @@ import jan.comic.Helper.ValueNullCheckHelper;
 import jan.comic.Search.Search;
 import jan.comic.Scene.NewScene;
 import jan.comic.Helper.WarningHelper;
+import jan.comic.TableConfigurator.ComicViewConfigurator;
 import jan.comic.XMLService.XMLParser;
 import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import java.io.IOException;
@@ -67,11 +69,16 @@ public class ComicController {
     @FXML
     private TextField txtPublisher;
 
+    private static final Logger logger = LoggerFactory.getLogger(ComicController.class);
+    private final ComicViewConfigurator comicTableConfigurator;
     public void setTblComic(TableView<DataItem> tblComic) {
         this.tblComic = tblComic;
     }
+    @Autowired
+    public ComicController(ComicViewConfigurator comicTableConfigurator) {
+        this.comicTableConfigurator = comicTableConfigurator;
+    }
 
-    private static final Logger logger = LoggerFactory.getLogger(ComicController.class);
     private String query;
     String table = "Comic_Table";
     String searchColumn = "Comic";
@@ -94,45 +101,48 @@ public class ComicController {
 
     @FXML
     public void initialize() {
-        tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.isEmpty()) {
-                logger.info(oldValue);
-                query = sqlWriteQuery.searchQuery(newValue);
-                search.performSearch(query,tblComic);
-                logger.info(newValue);
-            }
-        });
+        comicTableConfigurator.comicViewInitialize(tblComic,txtSearch);
+//        tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+//
+//        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//            if(!newValue.isEmpty()) {
+//                logger.info(oldValue);
+//                query = sqlWriteQuery.searchQuery(newValue);
+//                search.performSearch(query,tblComic);
+//                logger.info(newValue);
+//            }
+//        });
     }
 
     @FXML
     public void saveComic(ActionEvent actionEvent) {
-        String[] val = new String[5];
-        val[0] = txtComicName.getText();
-        val[1] = txtNumber.getText();
-        val[2] = txtPackaging.getText();
-        val[3] = txtBox.getText();
-        val[4] = txtPublisher.getText();
-
-        valueNullCheckHelper.comicValueChecker(val);
-        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertComicColumns), val);
-
-        query = sqlWriteQuery.readQuery(table);
-        Document doc = dataReadWrite.dataRead(query);
-        tableIInitiator.initialize(tblComic,table, doc);
+        comicTableConfigurator.comicSafe(txtComicName,txtNumber,txtPackaging,txtBox,txtPublisher,tblComic);
+//        String[] val = new String[5];
+//        val[0] = txtComicName.getText();
+//        val[1] = txtNumber.getText();
+//        val[2] = txtPackaging.getText();
+//        val[3] = txtBox.getText();
+//        val[4] = txtPublisher.getText();
+//
+//        valueNullCheckHelper.comicValueChecker(val);
+//        dataReadWrite.dataWrite(sqlWriteQuery.saveQuery(insertComicColumns), val);
+//
+//        query = sqlWriteQuery.readQuery(table);
+//        Document doc = dataReadWrite.dataRead(query);
+//        tableIInitiator.initialize(tblComic,table, doc);
     }
 
     @FXML
     public void comicDelete(ActionEvent   actionEvent) {
-        String id = txtDeleteID.getText();
-        if (ckBxSureDelete.isSelected()){
-            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
-            tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-            ckBxSureDelete.setSelected(false);
-        }else{
-            warningHelper.deleteWarning();
-        }
+        comicTableConfigurator.comicDelete(txtDeleteID,ckBxSureDelete,tblComic);
+//        String id = txtDeleteID.getText();
+//        if (ckBxSureDelete.isSelected()){
+//            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
+//            tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+//            ckBxSureDelete.setSelected(false);
+//        }else{
+//            warningHelper.deleteWarning();
+//        }
 
     }
 
@@ -147,16 +157,18 @@ public class ComicController {
 
     @FXML
     public void backToOptions(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
-        try {
-            newScene.newScene(optionFXML, stage, 200, 200, optionViewName);
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
+        comicTableConfigurator.backToOptions(btnBackToOptions);
+//        Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
+//        try {
+//            newScene.newScene(optionFXML, stage, 200, 200, optionViewName);
+//        } catch (IOException e) {
+//            throw new IOException(e);
+//        }
     }
 
 
     public void backToMainTable(ActionEvent actionEvent) {
-        tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+        comicTableConfigurator.backToMainTable(tblComic);
+//        tableIInitiator.initialize(tblComic,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 }

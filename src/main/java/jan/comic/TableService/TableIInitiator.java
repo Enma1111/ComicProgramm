@@ -6,10 +6,12 @@ import jan.comic.XMLService.DataXmlExtract;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
 import java.util.List;
-
+@Service
 public class TableIInitiator {
 
     private final DataXmlExtract dataXmlExtract;

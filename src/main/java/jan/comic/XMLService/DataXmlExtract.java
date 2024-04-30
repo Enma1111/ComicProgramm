@@ -4,6 +4,8 @@ import jan.comic.Data.DataItem;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Klasse um die XML Datei zu lesen
-
+@Service
 public class DataXmlExtract {
 
     private static final Logger logger = LoggerFactory.getLogger(DataXmlExtract.class);

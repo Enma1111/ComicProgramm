@@ -6,6 +6,7 @@ import jan.comic.Helper.ValueNullCheckHelper;
 import jan.comic.Scene.NewScene;
 import jan.comic.Helper.WarningHelper;
 import jan.comic.Search.Search;
+import jan.comic.TableConfigurator.MovieViewConfigurator;
 import jan.comic.XMLService.XMLParser;
 import jan.comic.TableService.TableIInitiator;
 import jan.comic.Data.DataReadWrite;
@@ -17,12 +18,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
+@Component
 public class MovieController {
     @FXML
     private TableColumn<DataItem, String> colPlace;
@@ -68,6 +70,12 @@ public class MovieController {
     private Button btnBackToTable;
 
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
+    private final MovieViewConfigurator movieTableConfigurator;
+
+    public MovieController(MovieViewConfigurator movieTableConfigurator) {
+        this.movieTableConfigurator = movieTableConfigurator;
+    }
+
     private String query;
     String table = "Movie_Table";
     String searchColumn = "Film";
@@ -86,8 +94,11 @@ public class MovieController {
     WarningHelper warningHelper = new WarningHelper();
     Search search = new Search(xmlParser,tableIInitiator,table);
 
+
+
     @FXML
     public void initialize() {
+//        movieTableConfigurator.movieViewInitialize(tblMovie,txtSearch);
         tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -101,23 +112,8 @@ public class MovieController {
     }
 
     @FXML
-    public void movieSearch(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void movieDelete(ActionEvent actionEvent) {
-        String id = txtDeleteID.getText();
-        if (ckBxSureDelete.isSelected()){
-            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
-            tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
-            ckBxSureDelete.setSelected(false);
-        }else{
-            warningHelper.deleteWarning();
-        }
-    }
-
-    @FXML
     public void saveMovie(ActionEvent actionEvent) {
+//        movieTableConfigurator.movieSafe(txtMovieName,txtMainActor,txtBox,txtDistributor,txtFormat,tblMovie);
         String[] val =new String[5];
         val[0] = txtMovieName.getText();
         val[1] = txtMainActor.getText();
@@ -134,7 +130,25 @@ public class MovieController {
     }
 
     @FXML
+    public void movieDelete(ActionEvent actionEvent) {
+//        movieTableConfigurator.movieDelete(txtDeleteID,ckBxSureDelete,tblMovie);
+        String id = txtDeleteID.getText();
+        if (ckBxSureDelete.isSelected()){
+            dataReadWrite.dataDelete(sqlWriteQuery.deleteQuery(),id);
+            tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
+            ckBxSureDelete.setSelected(false);
+        }else{
+            warningHelper.deleteWarning();
+        }
+    }
+
+    @FXML
+    public void movieSearch(ActionEvent actionEvent) {
+    }
+
+    @FXML
     public void backToOptions(ActionEvent actionEvent) throws IOException {
+//        movieTableConfigurator.backToOptions(btnBackToOptions);
         Stage stage = (Stage) btnBackToOptions.getScene().getWindow();
         try {
             newScene.newScene(optionFXML, stage, 200, 200,optionViewName);
@@ -145,6 +159,7 @@ public class MovieController {
 
     @FXML
     public void backToMainTable(ActionEvent actionEvent) {
+//        movieTableConfigurator.backToMainTable(tblMovie);
         tableIInitiator.initialize(tblMovie,table, dataReadWrite.dataRead(sqlWriteQuery.readQuery(table)));
     }
 }

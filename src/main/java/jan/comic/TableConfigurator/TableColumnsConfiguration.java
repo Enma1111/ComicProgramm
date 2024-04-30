@@ -2,7 +2,7 @@ package jan.comic.TableConfigurator;
 
 import java.util.Arrays;
 import java.util.List;
-
+@Deprecated
 public class TableColumnsConfiguration {
     public static final List<String> COMIC_COLUMNS = Arrays.asList("ID", "Comic", "Nummer", "Verpackung", "Kiste", "Verlag", "Doppelt");
     public static final List<String> COMIC_INSERT_COLUMNS = Arrays.asList("Comic", "Nummer", "Verpackung", "Kiste", "Verlag");
