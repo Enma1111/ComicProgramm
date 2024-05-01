@@ -21,8 +21,8 @@ public class ComicApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ComicApplication.class.getResource("option-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 200, 200);
         stage.setTitle("Optionen");
-        Image icon = new Image(getClass().getResourceAsStream("gear-icon.png"));
-        stage.getIcons().add(icon);
+//        Image icon = new Image(getClass().getResourceAsStream("gear-icon.png"));
+//        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }
