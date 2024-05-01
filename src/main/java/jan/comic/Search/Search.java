@@ -23,8 +23,8 @@ public class Search {
     private final String table;
     private static final Logger logger = LoggerFactory.getLogger(Search.class);
 
-    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-//    private final String url = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+//    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+    private final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
 
     public Search(XMLParser xmlParser, TableIInitiator tableIInitiator, String table) {
         this.xmlParser = xmlParser;

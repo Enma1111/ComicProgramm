@@ -79,39 +79,39 @@
          </children></AnchorPane>
     <AnchorPane prefHeight="708.0">
          <children>
-            <TableView fx:id="tblComic" layoutX="13.0" layoutY="5.0" prefHeight="689.0" prefWidth="855.0">
+            <TableView fx:id="tblComic" layoutX="20.0" layoutY="5.0" prefHeight="690.0" prefWidth="803.0">
               <columns>
                 <TableColumn fx:id="colID" editable="false" maxWidth="750.0" minWidth="30.0" prefWidth="64.0" text="ID">
                     <cellValueFactory>
                         <PropertyValueFactory property="id" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colComic" maxWidth="1392.0001220703125" minWidth="30.0" prefWidth="266.0" text="Comic">
+                <TableColumn fx:id="colComic" maxWidth="1392.0001220703125" minWidth="30.0" prefWidth="256.80005645751953" text="Comic">
                     <cellValueFactory>
                         <PropertyValueFactory property="comicName" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colNumber" maxWidth="760.0009155273438" minWidth="30.0" prefWidth="74.0" text="Nummer">
+                <TableColumn fx:id="colNumber" maxWidth="760.0009155273438" minWidth="30.0" prefWidth="73.60003662109375" text="Nummer">
                     <cellValueFactory>
                         <PropertyValueFactory property="number" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colPackaging" maxWidth="750.0" minWidth="24.0" prefWidth="118.0" text="Verpackung">
+                <TableColumn fx:id="colPackaging" maxWidth="750.0" minWidth="24.0" prefWidth="104.79995727539062" text="Verpackung">
                     <cellValueFactory>
                         <PropertyValueFactory property="packaging" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colBox" maxWidth="743.9996337890625" minWidth="30.0" prefWidth="82.0" text="Kiste">
+                <TableColumn fx:id="colBox" maxWidth="743.9996337890625" minWidth="30.0" prefWidth="52.800048828125" text="Kiste">
                     <cellValueFactory>
                         <PropertyValueFactory property="box" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colDoubleComicIn" prefWidth="118.0" text="Doppbelt In">
+                <TableColumn fx:id="colDoubleComicIn" prefWidth="89.60003662109375" text="Doppbelt In">
                     <cellValueFactory>
                         <PropertyValueFactory property="doubleComicIn" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colVerlag" prefWidth="114.0" text="Verlag">
+                <TableColumn fx:id="colVerlag" prefWidth="127.199951171875" text="Verlag">
                     <cellValueFactory>
                         <PropertyValueFactory property="publisher" />
                     </cellValueFactory>
