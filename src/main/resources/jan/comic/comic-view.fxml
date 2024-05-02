@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -17,46 +18,66 @@
 
 <SplitPane dividerPositions="0.298" prefHeight="710.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.GuiController.ComicController">
   <items>
-    <AnchorPane>
+    <AnchorPane stylesheets="@TableViewStyle.css">
          <children>
-            <Button fx:id="btnComicSave" layoutX="18.0" layoutY="341.0" mnemonicParsing="false" onAction="#saveComic" prefHeight="24.0" prefWidth="87.0" text="Speichern">
+            <Button fx:id="btnComicSave" layoutX="18.0" layoutY="341.0" mnemonicParsing="false" onAction="#saveComic" text="Speichern">
                <graphic>
                   <FontIcon iconLiteral="fas-save" />
-               </graphic></Button>
-            <Label layoutX="19.0" layoutY="31.0" text="Comic Titel" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnSave" />
+                  <String fx:value="text" />
+               </styleClass></Button>
+            <Label layoutX="19.0" layoutY="31.0" styleClass="text" text="Comic Titel:" />
             <TextField fx:id="txtComicName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="210.0" />
             <Separator layoutX="12.0" layoutY="379.0" prefHeight="3.0" prefWidth="218.0" />
-            <Label layoutX="20.0" layoutY="93.0" text="Nummer" />
+            <Label layoutX="20.0" layoutY="93.0" styleClass="text" text="Nummer:" />
             <TextField fx:id="txtNumber" layoutX="16.0" layoutY="119.0" prefHeight="26.0" prefWidth="210.0" />
             <TextField fx:id="txtBox" layoutX="16.0" layoutY="240.0" prefHeight="26.0" prefWidth="210.0" />
             <TextField fx:id="txtPublisher" layoutX="16.0" layoutY="304.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="19.0" layoutY="214.0" text="Kiste" />
-            <Label layoutX="15.0" layoutY="274.0" text="Verlag" />
-            <Label layoutX="15.0" layoutY="396.0" text="Comic Titel Suche" />
+            <Label layoutX="19.0" layoutY="214.0" styleClass="text" text="Kiste:" />
+            <Label layoutX="14.0" layoutY="277.0" styleClass="text" text="Verlag:" />
+            <Label layoutX="15.0" layoutY="396.0" styleClass="text" text="Comic Titel Suche:" />
             <TextField fx:id="txtSearch" layoutX="16.0" layoutY="425.0" onAction="#comicSearch" prefHeight="26.0" prefWidth="210.0" />
-            <Button fx:id="btnSearch" layoutX="20.0" layoutY="469.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="73.0" text="Suchen">
+            <Button fx:id="btnSearch" layoutX="20.0" layoutY="469.0" mnemonicParsing="false" prefHeight="27.0" text="Suchen">
                <graphic>
                   <FontIcon iconLiteral="fas-search" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnSearch" />
+                  <String fx:value="text" />
+               </styleClass></Button>
             <Separator layoutX="12.0" layoutY="502.0" prefHeight="3.0" prefWidth="218.0" />
-            <Label layoutX="18.0" layoutY="512.0" text="Löschen nach ID" />
-            <CheckBox fx:id="ckBxSureDelete" layoutX="16.0" layoutY="576.0" mnemonicParsing="false" text="Sicher" />
+            <Label layoutX="18.0" layoutY="512.0" styleClass="text" text="Löschen nach ID:" />
+            <CheckBox fx:id="ckBxSureDelete" layoutX="16.0" layoutY="576.0" mnemonicParsing="false" styleClass="checkbox" text="Sicher" />
             <TextField fx:id="txtDeleteID" layoutX="16.0" layoutY="542.0" prefHeight="26.0" prefWidth="210.0" />
-            <Button fx:id="btnDelete" layoutX="14.0" layoutY="603.0" mnemonicParsing="false" onAction="#comicDelete" prefHeight="24.0" prefWidth="87.0" text="Löschen" textAlignment="CENTER">
+            <Button fx:id="btnDelete" layoutX="14.0" layoutY="603.0" mnemonicParsing="false" onAction="#comicDelete" text="Löschen" textAlignment="CENTER">
                <graphic>
                   <FontIcon iconLiteral="fas-trash-alt" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnDelete" />
+                  <String fx:value="text" />
+               </styleClass></Button>
             <Separator layoutX="14.0" layoutY="641.0" prefHeight="3.0" prefWidth="218.0" />
             <Button fx:id="btnBackToOptions" layoutX="62.0" layoutY="661.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl">
                <graphic>
                   <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
-               </graphic></Button>
-            <Label layoutX="16.0" layoutY="152.0" text="Verpackung" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnBack" />
+                  <String fx:value="text" />
+               </styleClass></Button>
+            <Label layoutX="16.0" layoutY="154.0" styleClass="text" text="Verpackung:" />
             <TextField fx:id="txtPackaging" layoutX="16.0" layoutY="177.0" prefHeight="26.0" prefWidth="210.0" />
             <Button fx:id="btnBackToTable" layoutX="159.0" layoutY="469.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück">
                <graphic>
                   <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnBack" />
+                  <String fx:value="text" />
+               </styleClass></Button>
             <MenuBar prefHeight="26.0" prefWidth="298.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
@@ -77,9 +98,9 @@
               </menus>
             </MenuBar>
          </children></AnchorPane>
-    <AnchorPane prefHeight="709.0" prefWidth="900.0">
+    <AnchorPane prefHeight="709.0" prefWidth="900.0" styleClass="pnlBackground" stylesheets="@TableViewStyle.css">
          <children>
-            <TableView fx:id="tblComic" layoutX="7.0" layoutY="5.0" prefHeight="689.0" prefWidth="866.0">
+            <TableView fx:id="tblComic" layoutX="7.0" layoutY="5.0" prefHeight="689.0" prefWidth="866.0" stylesheets="@TableViewStyle.css">
               <columns>
                 <TableColumn fx:id="colID" editable="false" maxWidth="750.0" minWidth="30.0" prefWidth="64.0" text="ID">
                     <cellValueFactory>

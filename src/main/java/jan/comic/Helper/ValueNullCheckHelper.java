@@ -1,9 +1,7 @@
 package jan.comic.Helper;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ValueNullCheckHelper {
 
     public String[] comicValueChecker(String @NotNull [] val){

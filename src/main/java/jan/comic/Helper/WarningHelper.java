@@ -1,9 +1,8 @@
 package jan.comic.Helper;
 
 import javafx.scene.control.Alert;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class WarningHelper {
 
     public void deleteWarning(){

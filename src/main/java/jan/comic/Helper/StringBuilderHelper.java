@@ -4,10 +4,9 @@ package jan.comic.Helper;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Component
+
 public class StringBuilderHelper {
 
     private final List<String> colNames;

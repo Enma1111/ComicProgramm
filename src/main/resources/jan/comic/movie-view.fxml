@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -17,46 +18,66 @@
 
 <SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.GuiController.MovieController">
     <items>
-        <AnchorPane>
+        <AnchorPane stylesheets="@TableViewStyle.css">
             <children>
-                <Button fx:id="btnMovieSave" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#saveMovie" text="Speichern">
+                <Button fx:id="btnMovieSave" layoutX="19.0" layoutY="335.0" mnemonicParsing="false" onAction="#saveMovie" text="Speichern">
                <graphic>
                   <FontIcon iconLiteral="fas-save" />
-               </graphic></Button>
-                <Label layoutX="19.0" layoutY="31.0" text="Film Titel" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnSave" />
+                  <String fx:value="text" />
+               </styleClass></Button>
+                <Label layoutX="19.0" layoutY="31.0" styleClass="text" text="Film Titel:" />
                 <TextField fx:id="txtMovieName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
                 <Separator layoutX="20.0" layoutY="369.0" prefHeight="3.0" prefWidth="218.0" />
-                <Label layoutX="20.0" layoutY="92.0" text="Hauptdarsteller" />
+                <Label layoutX="20.0" layoutY="92.0" styleClass="text" text="Hauptdarsteller:" />
                 <TextField fx:id="txtMainActor" layoutX="20.0" layoutY="116.0" prefHeight="26.0" prefWidth="218.0" />
                 <TextField fx:id="txtBox" layoutX="20.0" layoutY="174.0" prefHeight="26.0" prefWidth="218.0" />
                 <TextField fx:id="txtDistributor" layoutX="19.0" layoutY="234.0" prefHeight="26.0" prefWidth="218.0" />
-                <Label layoutX="24.0" layoutY="149.0" text="Kiste" />
-                <Label layoutX="21.0" layoutY="209.0" text="Vertrieb" />
-                <Label layoutX="19.0" layoutY="383.0" text="Film Titel Suche" />
+                <Label layoutX="24.0" layoutY="149.0" styleClass="text" text="Kiste:" />
+                <Label layoutX="21.0" layoutY="209.0" styleClass="text" text="Vertrieb:" />
+                <Label layoutX="19.0" layoutY="383.0" styleClass="text" text="Film Titel Suche:" />
                 <TextField fx:id="txtSearch" layoutX="16.0" layoutY="409.0" prefHeight="26.0" prefWidth="218.0" />
                 <Button fx:id="btnSearch" layoutX="18.0" layoutY="442.0" mnemonicParsing="false" onAction="#movieSearch" text="Suche">
                <graphic>
                   <FontIcon iconLiteral="fas-search" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnSearch" />
+                  <String fx:value="text" />
+               </styleClass></Button>
                 <Separator layoutX="19.0" layoutY="482.0" prefHeight="3.0" prefWidth="218.0" />
-                <Label layoutX="22.0" layoutY="495.0" text="Löschen nach ID" />
-                <CheckBox fx:id="ckBxSureDelete" layoutX="20.0" layoutY="560.0" mnemonicParsing="false" text="Sicher" />
+                <Label layoutX="22.0" layoutY="495.0" styleClass="text" text="Löschen nach ID:" />
+                <CheckBox fx:id="ckBxSureDelete" layoutX="20.0" layoutY="560.0" mnemonicParsing="false" styleClass="checkbox" text="Sicher" />
                 <TextField fx:id="txtDeleteID" layoutX="19.0" layoutY="526.0" prefHeight="26.0" prefWidth="218.0" />
                 <Button fx:id="btnDelete" layoutX="20.0" layoutY="592.0" mnemonicParsing="false" onAction="#movieDelete" text="Löschen">
                <graphic>
                   <FontIcon iconLiteral="fas-trash-alt" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnDelete" />
+                  <String fx:value="text" />
+               </styleClass></Button>
             <Separator layoutX="16.0" layoutY="628.0" prefHeight="3.0" prefWidth="218.0" />
             <Button fx:id="btnBackToOptions" layoutX="69.0" layoutY="648.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl">
                <graphic>
                   <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
-               </graphic></Button>
-            <TextField fx:id="txtFormat" layoutX="18.0" layoutY="293.0" prefHeight="26.0" prefWidth="218.0" />
-            <Label layoutX="23.0" layoutY="268.0" text="Format" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnBack" />
+                  <String fx:value="text" />
+               </styleClass></Button>
+            <TextField fx:id="txtFormat" layoutX="20.0" layoutY="292.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label layoutX="23.0" layoutY="268.0" styleClass="text" text="Format:" />
             <Button fx:id="btnBackToTable" layoutX="167.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück">
                <graphic>
                   <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
-               </graphic></Button>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btnBack" />
+                  <String fx:value="text" />
+               </styleClass></Button>
             <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="302.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">

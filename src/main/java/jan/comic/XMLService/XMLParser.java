@@ -1,8 +1,6 @@
 package jan.comic.XMLService;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -22,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 //Klasse um aus ein ResultSet in ein XML umzuwandeln
-@Service
+
 public class XMLParser {
 
     private final String name;
