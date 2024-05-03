@@ -3,8 +3,10 @@ package jan.comic.Scene;
 import jan.comic.ComicApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+
 
 
 import java.io.IOException;

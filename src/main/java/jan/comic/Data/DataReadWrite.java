@@ -4,6 +4,7 @@ import jan.comic.Helper.PreparedStatementHelper;
 import jan.comic.XMLService.XMLParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,8 +18,11 @@ public class DataReadWrite {
     String tableName;
     private final XMLParser xmlParser;
     private final PreparedStatementHelper preparedStatementHelper;
-//    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
-    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+
+
+//    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+
     private static final Logger logger = LoggerFactory.getLogger(DataReadWrite.class);
 
     public DataReadWrite(String tableName, XMLParser xmlParser, PreparedStatementHelper preparedStatementHelper) {

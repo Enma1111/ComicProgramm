@@ -1,0 +1,21 @@
+
+†	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$d0d3dd67-7e63-412e-90c4-7f663c3dcdb7
+]
+java:S1643Q"Use a StringBuilder instead.(¸ºØìşÿÿÿÿJ$1b469c78-1aee-43e6-a2b7-872dd065034a
+X
+java:S1643S"Use a StringBuilder instead.(Û‚øJ$9f3cbee1-8bcc-410e-adf3-be9f86a9469c
+`
+java:S2629F"$Invoke method(s) only conditionally.(õ“µÛJ$9e0524fa-3982-45c0-a027-09046b840807
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(šçÿÀıÿÿÿÿJ$7fba61a3-31e1-4bc9-b388-3c676e19eaae
+e
+java:S6355"HAdd 'since' and/or 'forRemoval' arguments to the @Deprecated annotation.(õˆúš8ÈÂ©ñ1
+R
+java:S1133"5Do not forget to remove this deprecated code someday.(›¸åè8ÉÂ©ñ1
+E
+java:S1123"(Add the missing @deprecated Javadoc tag.(›¸åè8ÉÂ©ñ1
+l
+java:S1172"0Remove this unused method parameter "tableName".(ªÕç‰J$83de2ed8-0fc5-485d-84a8-254f69c3c55e
+
+java:S6204 "RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹J$ab94f8ee-2c57-45bf-b6e4-b5591e7c3fd7
+y
+java:S16126"=Replace this lambda with method reference 'Objects::nonNull'.(ÈÄ·J$b05dfcac-586d-4538-9006-e1ec61034f3d

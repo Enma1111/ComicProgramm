@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,34 +14,104 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.BookController">
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.GuiController.BookController">
     <items>
-        <AnchorPane>
+        <AnchorPane stylesheets="@TableViewStyle.css">
             <children>
-                <Button fx:id="btnBookSave" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#saveBook" text="Speichern" />
-                <Label layoutX="24.0" layoutY="31.0" text="Buch Titel" />
-                <TextField fx:id="txtBookName" layoutX="19.0" layoutY="56.0" prefHeight="26.0" prefWidth="218.0" />
-                <Separator layoutX="14.0" layoutY="341.0" prefHeight="3.0" prefWidth="218.0" />
-                <TextField fx:id="txtBox" layoutX="19.0" layoutY="134.0" prefHeight="26.0" prefWidth="218.0" />
-                <TextField fx:id="txtPublisher" layoutX="16.0" layoutY="215.0" prefHeight="26.0" prefWidth="218.0" />
-                <Label layoutX="24.0" layoutY="107.0" text="Ort" />
-                <Label layoutX="25.0" layoutY="182.0" text="Verlag" />
-                <Label layoutX="19.0" layoutY="354.0" text="Buch Titel Suche" />
-                <TextField fx:id="txtSearch" layoutX="16.0" layoutY="385.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="btnSearch" layoutX="18.0" layoutY="422.0" mnemonicParsing="false" onAction="#bookSearch" text="Suche" />
-                <Separator layoutX="14.0" layoutY="464.0" prefHeight="3.0" prefWidth="218.0" />
-                <Label layoutX="19.0" layoutY="481.0" text="Löschen nach ID" />
-                <CheckBox fx:id="ckBxSureDelete" layoutX="20.0" layoutY="543.0" mnemonicParsing="false" text="Sicher" />
-                <TextField fx:id="txtDeleteID" layoutX="19.0" layoutY="508.0" prefHeight="26.0" prefWidth="218.0" />
-                <Button fx:id="btnDelete" layoutX="16.0" layoutY="574.0" mnemonicParsing="false" onAction="#bookDelete" text="Löschen" />
-            <Button fx:id="btnBackToOptions" layoutX="50.0" layoutY="617.0" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl" />
-            <Separator layoutX="17.0" layoutY="607.0" prefHeight="3.0" prefWidth="218.0" />
-            <Button fx:id="btnBackToTable" layoutX="170.0" layoutY="422.0" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück" />
+            <VBox layoutX="2.0" prefHeight="710.0" prefWidth="273.0">
+               <children>
+                  <MenuBar prefHeight="26.0" prefWidth="302.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                      <Label styleClass="text" text="Buch Titel:" />
+                      <TextField fx:id="txtBookName" prefHeight="26.0" prefWidth="218.0" />
+                      <Label styleClass="text" text="Ort:" />
+                      <TextField fx:id="txtBox" prefHeight="26.0" prefWidth="218.0" />
+                      <Label styleClass="text" text="Verlag:" />
+                      <TextField fx:id="txtPublisher" prefHeight="26.0" prefWidth="218.0" />
+                      <Button fx:id="btnBookSave" mnemonicParsing="false" onAction="#saveBook" text="Speichern">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-save" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="btnSave" />
+                        <String fx:value="text" />
+                     </styleClass>
+                  </Button>
+                      <Separator prefHeight="3.0" prefWidth="218.0" />
+                      <Label styleClass="text" text="Buch Titel Suche:" />
+                      <TextField fx:id="txtSearch" prefHeight="26.0" prefWidth="218.0" />
+                  <HBox prefHeight="38.0" prefWidth="106.0">
+                     <children>
+                            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#bookSearch" text="Suche">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-search" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="btnSearch" />
+                              <String fx:value="text" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnBackToTable" mnemonicParsing="false" onAction="#backToMainTable" text="Zurück">
+                           <graphic>
+                              <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="btnBack" />
+                              <String fx:value="text" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                      <Separator prefHeight="3.0" prefWidth="218.0" />
+                      <Label styleClass="text" text="Löschen nach ID:" />
+                      <TextField fx:id="txtDeleteID" prefHeight="26.0" prefWidth="218.0" />
+                      <CheckBox fx:id="ckBxSureDelete" mnemonicParsing="false" styleClass="checkbox" text="Sicher" />
+                      <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#bookDelete" text="Löschen">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-trash-alt" styleClass="text" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="btnDelete" />
+                        <String fx:value="label" />
+                     </styleClass>
+                  </Button>
+                  <Separator prefHeight="3.0" prefWidth="218.0" />
+                  <Button fx:id="btnBackToOptions" mnemonicParsing="false" onAction="#backToOptions" text="Zurück zur Auswahl">
+                     <graphic>
+                        <FontIcon iconLiteral="typ-arrow-back" iconSize="16" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="btnBack" />
+                        <String fx:value="text" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
             </children></AnchorPane>
         <AnchorPane prefHeight="708.0">
             <children>
-                <TableView fx:id="tblBook" layoutX="9.0" layoutY="14.0" prefHeight="660.0" prefWidth="855.0">
+                <TableView fx:id="tblBook" layoutX="9.0" layoutY="3.0" prefHeight="690.0" prefWidth="855.0">
                     <columns>
                         <TableColumn fx:id="colID" prefWidth="75.0" text="ID">
                             <cellValueFactory>

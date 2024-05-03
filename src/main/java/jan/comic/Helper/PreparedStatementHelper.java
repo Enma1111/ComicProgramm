@@ -1,7 +1,6 @@
 package jan.comic.Helper;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

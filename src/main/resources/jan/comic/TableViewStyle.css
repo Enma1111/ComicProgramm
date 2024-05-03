@@ -1,0 +1,109 @@
+.btnSave{
+    -fx-background-color: #17db17;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-padding: 5px 10px; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0); 
+}
+.btnSave:hover {
+    -fx-background-color: #008000;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+.btnSave:pressed {
+    -fx-background-color: #007000;
+    -fx-background-insets: 2 3 1 3, 2 2 1 2, 2 1 1 1;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.btnSearch {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-padding: 5px 10px; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0); 
+}
+.btnSearch:hover {
+    -fx-background-color: #5F9EA0;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+.btnSearch:pressed {
+    -fx-background-color: #4169E1;
+    -fx-background-insets: 2 3 1 3, 2 2 1 2, 2 1 1 1;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.btnDelete {
+    -fx-background-color:  #F03A1B;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-padding: 5px 10px; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0); 
+}
+.btnDelete:hover {
+    -fx-background-color: #D02700;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+.btnDelete:pressed {
+    -fx-background-color: #A01900;
+    -fx-background-insets: 2 3 1 3, 2 2 1 2, 2 1 1 1;
+    -fx-background-radius: 5, 4, 3;
+}
+.btnBack {
+    -fx-background-color: #CCCCCC;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-padding: 5px 10px; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0); 
+}
+.btnBack:hover {
+    -fx-background-color: #BBBBBB;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+.btnBack:pressed {
+    -fx-background-color: #AAAAAA;
+    -fx-background-insets: 2 3 1 3, 2 2 1 2, 2 1 1 1;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.btnSave:hover, .btnSave:pressed, 
+.btnSearch:hover, .btnSearch:pressed,
+.btnDelete:hover, .btnDelete:pressed,
+.btnBack:hover, .btnBack:pressed{
+    -fx-border-color: #888888; 
+    -fx-border-width: 1px; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 0, 0); 
+}
+
+.text {
+    -fx-color: #333; 
+    -fx-font-family: Arial, Helvetica, sans-serif; 
+    -fx-text-decoration: underline;
+    -fx-font-size: 14px;
+    -fx-text-align: left; 
+    -fx-margin-bottom: 5px; 
+} 
+.menu-bar {
+    -fx-background-color: #f0f0f0; 
+    -fx-border-color: #ccc; 
+    -fx-border-width: 1px; 
+} 
+
+.menu-bar .menu {
+    -fx-text-fill: black;
+}
+
+.menu-bar .menu .menu-item {
+    -fx-text-fill: black;
+}
+.checkbox {
+    -fx-font-size: 14px;
+    -fx-font-family: Arial, Helvetica, sans-serif;
+}

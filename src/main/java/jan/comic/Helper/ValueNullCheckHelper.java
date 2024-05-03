@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ValueNullCheckHelper {
 
-    public String[] comicValueChecker(String[] val){
+    public String[] comicValueChecker(String @NotNull [] val){
 
         for (int i = 0; i < val.length; i++) {
             if (i == 1) {

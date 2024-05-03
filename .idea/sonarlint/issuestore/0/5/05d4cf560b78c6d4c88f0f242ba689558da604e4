@@ -1,0 +1,12 @@
+
+†	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$caafe5f7-415f-4089-a93a-376c841d6410
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‰å»£ıÿÿÿÿJ$c2b2a970-13d7-456e-9a01-62ec1e85d4da
+‹
+java:S6355"HAdd 'since' and/or 'forRemoval' arguments to the @Deprecated annotation.(õˆúš8ş€Ìñ1J$bd40c7ba-5aa8-41e1-9a04-c97445939a9e
+}
+java:S1133"5Do not forget to remove this deprecated code someday.( ÿ¹şøÿÿÿÿ8ş€Ìñ1J$96e50dd8-231f-4d5f-9397-f15663f7bc3c
+p
+java:S1123"(Add the missing @deprecated Javadoc tag.( ÿ¹şøÿÿÿÿ8ÿ€Ìñ1J$4d9348fc-53d6-487f-b2fc-cf08d53ad317
+{
+java:S1118":Add a private constructor to hide the implicit public one.( ÿ¹şøÿÿÿÿJ$3bc49305-7fa2-4156-8e49-543302cb490f
+f	java:S106$"+Replace this use of System.out by a logger.(ÑğÔJ$ca673762-8953-464c-86ed-0637b3e3cfc7

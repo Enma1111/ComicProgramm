@@ -2,6 +2,7 @@ package jan.comic.Helper;
 
 import javafx.scene.control.Alert;
 
+
 public class WarningHelper {
 
     public void deleteWarning(){

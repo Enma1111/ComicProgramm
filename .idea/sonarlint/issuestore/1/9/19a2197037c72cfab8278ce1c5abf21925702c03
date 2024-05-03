@@ -1,0 +1,5 @@
+
+	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8ÑÁéÍó1J$c3772334-95c7-403a-b0da-d6755e105454
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ğ¾¯°8ÓÁéÍó1J$bdc42212-bb98-4a05-a601-cef59eba55f1
+¯
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ú¿ŸÔ8ŞÁéÍó1J$ca55902b-6cfe-4d97-8f9e-ff5939684d45
