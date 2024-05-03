@@ -31,7 +31,7 @@ public class OptionController {
 //        optionViewConfigurator.enterComicView(btnComic);
         Stage stage = (Stage) btnComic.getScene().getWindow();
         try {
-            newScene.newScene("comic-view.fxml", stage, 1200, 700,comicViewName);
+            newScene.newScene("comic-view.fxml", stage, 1150, 710,comicViewName);
         } catch (IOException e) {
             throw new IOException(e);
         }

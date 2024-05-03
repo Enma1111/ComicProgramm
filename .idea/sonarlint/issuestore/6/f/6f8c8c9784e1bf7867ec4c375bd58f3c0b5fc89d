@@ -1,0 +1,9 @@
+
+	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8“íÚ­ñ1J$523cdd15-e8f2-4861-8abb-9c04b00f871c
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(šçÿÀıÿÿÿÿ8”íÚ­ñ1J$6c027ced-2b8a-4980-a807-d2cd158f7977
+ƒ	java:S125"<This block of commented-out lines of code should be removed.(Ô•“Áşÿÿÿÿ8íÚ­ñ1J$2b36d7cf-6e93-46c3-9386-ff58a3173b54
+z
+java:S6881N"2Use virtual threads for heavy blocking operations.(À„í”üÿÿÿÿ8éÅÇò1J$24f63417-0014-41e5-adb5-99fe04707284
+¡
+java:S2142S"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8¢íÚ­ñ1J$a448607c-33ee-400c-97a7-4fd7620a5651
+~	java:S125b"<This block of commented-out lines of code should be removed.(Ó¢êÿ8£íÚ­ñ1J$dc33dee2-fc0a-49b5-ad90-3dc679818d81

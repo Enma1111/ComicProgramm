@@ -1,0 +1,23 @@
+
+	java:S1126"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8´¿¡¡ñ1J$83ba6837-7fe1-409e-89fc-10bbaaef3af7
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·ıäÓúÿÿÿÿ8¶¿¡¡ñ1J$6e379eec-78f3-442b-9b7c-831da851d7ef
+œ	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ØÆüŸ8¾¿¡¡ñ1J$50604e57-3e72-407d-bedf-6490de1a29c8
+œ	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ƒùı¥8¾¿¡¡ñ1J$bcf9732e-8ccd-4fa0-b95d-2dd7ff0d14f6
+‹
+java:S6355	"HAdd 'since' and/or 'forRemoval' arguments to the @Deprecated annotation.(õˆúš8‡¢‘©ñ1J$a6804694-9865-4d0f-a40f-257255a63fe1
+}
+java:S1133
+"5Do not forget to remove this deprecated code someday.(¸”êœıÿÿÿÿ8‡¢‘©ñ1J$d7d9ddda-6339-4ce5-a2d7-aa77753bc943
+p
+java:S1123
+"(Add the missing @deprecated Javadoc tag.(¸”êœıÿÿÿÿ8ˆ¢‘©ñ1J$4a73b33d-7bb8-4ca9-88f5-4f6c8b8ac679
+~	java:S125"<This block of commented-out lines of code should be removed.(Ü±­«8Á¿¡¡ñ1J$02e48912-3c53-49d2-93b2-a64cfaa960f9
+N
+java:S1172"1Remove this unused method parameter "searchList".(ªóã¹8¼½’©ñ1
+X	java:S125 "<This block of commented-out lines of code should be removed.(¾è¬Ú8¿½’©ñ1
+N
+java:S1068"1Remove this unused "sqlWriteQuery" private field.(·Üãì8Ä½’©ñ1
+K
+java:S1068".Remove this unused "Temp_Table" private field.(ØÆüŸ8Ä½’©ñ1
+Z
+java:S1144*"8Remove this unused private "insertIntoTempTable" method.(ä“½°øÿÿÿÿ8Ä½’©ñ1
