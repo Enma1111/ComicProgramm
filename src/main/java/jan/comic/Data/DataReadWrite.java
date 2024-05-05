@@ -20,8 +20,8 @@ public class DataReadWrite {
     private final PreparedStatementHelper preparedStatementHelper;
 
 
-//    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
-    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
+    static final String URL = "jdbc:sqlite:C:/Users/Jan/Desktop/Collection/Collection.db";
+//    static final String URL = "jdbc:sqlite:C:/Users/Reha-TN/Desktop/Collection/Collection.db";
 
     private static final Logger logger = LoggerFactory.getLogger(DataReadWrite.class);
 

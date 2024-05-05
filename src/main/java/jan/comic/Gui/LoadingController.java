@@ -1,4 +1,4 @@
-package jan.comic.GuiController;
+package jan.comic.Gui;
 
 import jan.comic.Scene.NewScene;
 import javafx.animation.KeyFrame;
@@ -19,8 +19,8 @@ public class LoadingController {
     private Label lblProgress;
     NewScene newScene = new NewScene();
 
-    private final String[] loadingMessages = {"Sammlung wird erzeugt", "Abhängichkeiten werden injeziert",
-            "Sammlung wird gezählt", "Es ist zu viel"};
+    private final String[] loadingMessages = {"Sammlung wird erzeugt...", "Abhängichkeiten werden injeziert...",
+            "Sammlung wird gezählt...", "Es ist zu viel!!!"};
     private int messageIndex = 0;
 
 

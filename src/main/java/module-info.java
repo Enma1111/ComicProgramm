@@ -13,8 +13,8 @@ module jan.comic {
     requires org.kordamp.ikonli.typicons;
 
     exports jan.comic;
-    exports jan.comic.GuiController;
-    opens jan.comic.GuiController to javafx.fxml;
+    exports jan.comic.Gui;
+    opens jan.comic.Gui to javafx.fxml;
     exports jan.comic.Data;
     opens jan.comic.Data to javafx.fxml;
     exports jan.comic.SQLServices;

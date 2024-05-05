@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.GuiController.BookController">
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="710.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jan.comic.Gui.BookController">
     <items>
         <AnchorPane stylesheets="@TableViewStyle.css">
             <children>

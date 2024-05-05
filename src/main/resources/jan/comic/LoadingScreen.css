@@ -1,0 +1,3 @@
+.text-effect {
+  -fx-text-overflow: ellipsis;
+}

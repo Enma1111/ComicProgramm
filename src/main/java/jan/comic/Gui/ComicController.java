@@ -1,4 +1,4 @@
-package jan.comic.GuiController;
+package jan.comic.Gui;
 
 import jan.comic.Data.DataItem;
 import jan.comic.Helper.PreparedStatementHelper;
